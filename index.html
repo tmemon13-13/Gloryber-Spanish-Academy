@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GloryBer's Spanish Academy | Alexandria, VA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #E63946;
+      --yellow: #FFD166;
+      --blue: #118AB2;
+      --green: #06D6A0;
+      --purple: #A855F7;
+      --orange: #FF6B35;
+      --white: #FFFDF7;
+      --dark: #1A1A2E;
+      --nav-h: 72px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: var(--white);
+      box-shadow: 0 3px 20px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--red);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo span { color: var(--blue); }
+    .nav-logo em { color: var(--green); font-style: normal; }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--dark);
+      padding: 8px 14px;
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover { background: var(--yellow); color: var(--dark); }
+
+    .nav-cta {
+      background: var(--red);
+      color: white !important;
+      border-radius: 50px;
+      padding: 10px 20px !important;
+      font-weight: 800 !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230,57,70,0.4);
+      background: var(--red) !important;
+      color: white !important;
+    }
+
+    /* ===== HERO ===== */
+    #home {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      background: linear-gradient(135deg, #FFF9E6 0%, #E8F8FF 50%, #FFF0F1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape-1 { width: 300px; height: 300px; background: var(--yellow); top: -50px; left: -80px; animation-delay: 0s; }
+    .shape-2 { width: 200px; height: 200px; background: var(--blue); bottom: 100px; right: -60px; animation-delay: 1.5s; }
+    .shape-3 { width: 150px; height: 150px; background: var(--green); top: 200px; left: 5%; animation-delay: 3s; }
+    .shape-4 { width: 100px; height: 100px; background: var(--red); top: 100px; right: 15%; animation-delay: 2s; }
+    .shape-5 { width: 250px; height: 250px; background: var(--purple); bottom: -80px; left: 30%; animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 40px 20px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero-content h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .hero-content h1 .accent-red { color: var(--red); }
+    .hero-content h1 .accent-blue { color: var(--blue); }
+
+    .hero-subtitle {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 8px 25px rgba(230,57,70,0.35);
+    }
+
+    .btn-primary:hover { box-shadow: 0 12px 35px rgba(230,57,70,0.5); }
+
+    .btn-secondary {
+      background: var(--yellow);
+      color: var(--dark);
+      box-shadow: 0 8px 25px rgba(255,209,102,0.4);
+    }
+
+    .btn-secondary:hover { box-shadow: 0 12px 35px rgba(255,209,102,0.6); }
+
+    .hero-flags {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      letter-spacing: 8px;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+
+    /* ===== STATS STRIP ===== */
+    .stats-strip {
+      background: var(--dark);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+      color: white;
+    }
+
+    .stat-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .stat-num.y { color: var(--yellow); }
+    .stat-num.g { color: var(--green); }
+    .stat-num.b { color: #60C8FF; }
+    .stat-num.r { color: #FF8E8E; }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ===== SECTIONS SHARED ===== */
+    section {
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 5px 16px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .tag-red { background: #FFE8EA; color: var(--red); }
+    .tag-blue { background: #E0F4FF; color: var(--blue); }
+    .tag-green { background: #D4FFF5; color: #048A6E; }
+    .tag-orange { background: #FFE8DC; color: var(--orange); }
+    .tag-purple { background: #F3E8FF; color: var(--purple); }
+
+    h2.section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--dark);
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: #666;
+      line-height: 1.7;
+      max-width: 580px;
+      font-weight: 600;
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      max-width: 100%;
+      padding: 100px 40px;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--red), var(--yellow), var(--green), var(--blue));
+    }
+
+    .about-avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .about-card .role {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .about-card p {
+      color: #666;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      bottom: -20px;
+      right: -10px;
+      box-shadow: 0 8px 20px rgba(6,214,160,0.4);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .about-text .lang-pill {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin: 4px 4px 4px 0;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .value-item {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+
+    .value-icon {
+      font-size: 1.5rem;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    /* ===== PROGRAMS ===== */
+    #programs {
+      background: white;
+    }
+
+    .programs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .program-card {
+      border-radius: 24px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    }
+
+    .program-card.red { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
+    .program-card.blue { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
+    .program-card.green { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
+    .program-card.yellow { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
+    .program-card.orange { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
+    .program-card.purple { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
+
+    .program-emoji {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .program-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .program-card p {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .program-esp {
+      margin-top: 12px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    /* ===== ACTIVITIES ===== */
+    #activities {
+      background: linear-gradient(180deg, #F0FDF9 0%, #FFF9E6 100%);
+      max-width: 100%;
+      padding: 100px 40px;
+    }
+
+    .activities-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .activities-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .activities-header .section-desc {
+      margin: 0 auto;
+    }
+
+    .activities-bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+
+    .activity-tile {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .activity-tile:hover { transform: translateY(-5px); }
+
+    .activity-tile.wide { grid-column: span 2; text-align: left; display: flex; gap: 24px; align-items: center; }
+
+    .activity-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .activity-tile.wide .activity-icon {
+      font-size: 4rem;
+      margin-bottom: 0;
+      min-width: 80px;
+    }
+
+    .activity-tile h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .activity-tile p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .gallery-placeholder {
+      margin-top: 60px;
+      background: white;
+      border-radius: 24px;
+      padding: 50px;
+      text-align: center;
+      border: 3px dashed #DDD;
+    }
+
+    .gallery-placeholder h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .gallery-placeholder p {
+      color: #999;
+      font-weight: 600;
+    }
+
+    .gallery-grid-mock {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .gallery-mock-item {
+      aspect-ratio: 1;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .gallery-mock-item:nth-child(1) { background: #FFE0E3; }
+    .gallery-mock-item:nth-child(2) { background: #D6EFFF; }
+    .gallery-mock-item:nth-child(3) { background: #CAFFEF; }
+    .gallery-mock-item:nth-child(4) { background: #FFF5CC; }
+    .gallery-mock-item:nth-child(5) { background: #FFE5D9; }
+    .gallery-mock-item:nth-child(6) { background: #F3E8FF; }
+    .gallery-mock-item:nth-child(7) { background: #D6EFFF; }
+    .gallery-mock-item:nth-child(8) { background: #CAFFEF; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: var(--dark);
+      max-width: 100%;
+      padding: 100px 40px;
+    }
+
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      color: white;
+    }
+
+    .testimonials .section-tag { background: rgba(255,255,255,0.15); color: white; margin-bottom: 16px; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 50px;
+      text-align: left;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .stars {
+      color: var(--yellow);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-card p {
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .reviewer-name {
+      font-weight: 800;
+      color: white;
+    }
+
+    .reviewer-source {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: white;
+      max-width: 100%;
+      padding: 100px 40px;
+    }
+
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.8rem;
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      color: #666;
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+
+    .contact-item-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .ci-red { background: #FFE0E3; }
+    .ci-blue { background: #D6EFFF; }
+    .ci-green { background: #CAFFEF; }
+    .ci-yellow { background: #FFF5CC; }
+
+    .contact-item-text strong {
+      display: block;
+      font-weight: 800;
+      color: var(--dark);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .contact-item-text span {
+      color: #555;
+      font-weight: 600;
+    }
+
+    .contact-item-text a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .contact-form {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      border-radius: 28px;
+      padding: 48px 40px;
+    }
+
+    .contact-form h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #E5E5E5;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+      background: white;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--red);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(230,57,70,0.4);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 40px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 30px;
+    }
+
+    .footer-brand {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .footer-brand span { color: #60C8FF; }
+
+    .footer-desc {
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--yellow); }
+
+    .footer-bottom {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .footer-bottom span { color: var(--yellow); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .activities-bento { grid-template-columns: 1fr 1fr; }
+      .activity-tile.wide { grid-column: span 2; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .gallery-grid-mock { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 70px 20px; }
+      #about, #activities, .testimonials, #contact { padding: 70px 20px; }
+      .stats-strip { gap: 30px; padding: 24px 20px; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .activities-bento { grid-template-columns: 1fr; }
+      .activity-tile.wide { flex-direction: column; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .contact-form { padding: 30px 24px; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#home" class="nav-logo">GloryBer's <span>Spanish</span> <em>Academy</em></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🌟 Alexandria, VA · Est. 2021</div>
+      <h1>
+        <span class="accent-red">GloryBer's</span><br/>
+        <span class="accent-blue">Spanish</span> Academy
+      </h1>
+      <div class="hero-subtitle">¡Aprender, Crecer, Brillar!</div>
+      <p>A nurturing bilingual daycare where little ones learn, grow, and thrive — in both English <em>and</em> Spanish.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Schedule a Visit 🏫</a>
+        <a href="#programs" class="btn btn-secondary">Our Programs →</a>
+      </div>
+      <div class="hero-flags">🇺🇸 🌟 🇪🇸</div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat">
+      <div class="stat-num y">Est. 2021</div>
+      <div class="stat-label">Founded</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num g">Bilingual</div>
+      <div class="stat-label">English & Spanish</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num b">Ages 0–5</div>
+      <div class="stat-label">Infants to Pre-K</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num r">Mon–Fri</div>
+      <div class="stat-label">7AM – 5PM</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num y">Flexible</div>
+      <div class="stat-label">1 Day or Full-Time</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="about-inner">
+      <div class="about-visual reveal">
+        <div class="about-card">
+          <div class="about-avatar">👩‍🏫</div>
+          <h3>Gloria Elizabeth Franco</h3>
+          <div class="role">Founder, Teacher & Coordinator</div>
+          <p>With years of experience working in childcare centers throughout the Alexandria area, Ms. Gloria took everything she learned and created a center where every child feels at home — and has fun doing it.</p>
+        </div>
+        <div class="floating-badge">⭐ 5-Star Rated</div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-tag tag-blue">About Us · Sobre Nosotros</div>
+        <h2 class="section-title">More Than a Daycare — A Second Home 🏡</h2>
+        <p class="section-desc">Founded in 2021 in Alexandria, VA, GloryBer's Spanish Academy is a home-based bilingual learning center dedicated to providing a safe, nurturing, and language-rich environment for children from infancy through preschool.</p>
+        <div style="margin-top: 20px;">
+          <span class="lang-pill">🗣️ English</span>
+          <span class="lang-pill">🗣️ Español</span>
+          <span class="lang-pill">🎨 Arts</span>
+          <span class="lang-pill">🍽️ Healthy Meals</span>
+          <span class="lang-pill">🌿 Natural Light</span>
+        </div>
+        <div class="values-grid">
+          <div class="value-item"><span class="value-icon">☀️</span> Natural light-filled spaces</div>
+          <div class="value-item"><span class="value-icon">🍎</span> Healthy, nutritious meals</div>
+          <div class="value-item"><span class="value-icon">🎓</span> Trained, caring staff</div>
+          <div class="value-item"><span class="value-icon">🤸</span> Daily physical activity</div>
+          <div class="value-item"><span class="value-icon">🚪</span> No one turned away</div>
+          <div class="value-item"><span class="value-icon">🌎</span> Bilingual immersion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <section id="programs">
+    <div class="programs-header reveal">
+      <div>
+        <div class="section-tag tag-red">Programs · Programas</div>
+        <h2 class="section-title">What We Offer 🌈</h2>
+      </div>
+      <p class="section-desc" style="max-width: 340px;">Every program is designed to spark curiosity, build language skills, and keep kids happy.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card red reveal">
+        <span class="program-emoji">🍼</span>
+        <h3>Infant Care</h3>
+        <p>Warm, attentive care for our tiniest learners. We create a safe and soothing environment to support healthy development from day one.</p>
+        <div class="program-esp">Cuidado de Bebés</div>
+      </div>
+      <div class="program-card blue reveal">
+        <span class="program-emoji">🧸</span>
+        <h3>Toddler Program</h3>
+        <p>Learning through play, songs, and stories in both English and Spanish. Designed to build vocabulary, motor skills, and social confidence.</p>
+        <div class="program-esp">Programa para Niños Pequeños</div>
+      </div>
+      <div class="program-card green reveal">
+        <span class="program-emoji">🎓</span>
+        <h3>Pre-K Readiness</h3>
+        <p>Preparing children for kindergarten with age-appropriate literacy, numeracy, and bilingual language development activities.</p>
+        <div class="program-esp">Preparación Pre-Kinder</div>
+      </div>
+      <div class="program-card yellow reveal">
+        <span class="program-emoji">🗣️</span>
+        <h3>Spanish Immersion</h3>
+        <p>Our signature bilingual curriculum weaves Spanish naturally into every part of the day — songs, instructions, stories, and play.</p>
+        <div class="program-esp">Inmersión en Español</div>
+      </div>
+      <div class="program-card orange reveal">
+        <span class="program-emoji">🍎</span>
+        <h3>Healthy Meals Program</h3>
+        <p>We provide nutritious, balanced meals and snacks throughout the day to fuel learning and growth.</p>
+        <div class="program-esp">Comidas Saludables</div>
+      </div>
+      <div class="program-card purple reveal">
+        <span class="program-emoji">📅</span>
+        <h3>Flexible Enrollment</h3>
+        <p>Need care for just one day a week or every day? We accommodate all schedules — no family is turned away.</p>
+        <div class="program-esp">Inscripción Flexible</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES & GALLERY -->
+  <div id="activities">
+    <div class="activities-inner">
+      <div class="activities-header reveal">
+        <div class="section-tag tag-green">Activities · Actividades</div>
+        <h2 class="section-title">A Day Full of Fun & Learning 🎉</h2>
+        <p class="section-desc">Every single day is packed with activities designed to grow little minds and big smiles.</p>
+      </div>
+
+      <div class="activities-bento">
+        <div class="activity-tile wide reveal">
+          <span class="activity-icon">🎨</span>
+          <div>
+            <h3>Art & Creativity</h3>
+            <p>A dedicated art and music room where children express themselves through painting, drawing, crafts, and singing — in both languages!</p>
+          </div>
+        </div>
+        <div class="activity-tile reveal">
+          <span class="activity-icon">📚</span>
+          <h3>Story Time</h3>
+          <p>Daily bilingual storytime to build vocabulary and imagination.</p>
+        </div>
+        <div class="activity-tile reveal">
+          <span class="activity-icon">🏃</span>
+          <h3>Physical Play</h3>
+          <p>Indoor and outdoor activities every day, rain or shine.</p>
+        </div>
+        <div class="activity-tile wide reveal">
+          <span class="activity-icon">🧩</span>
+          <div>
+            <h3>Educational Toys & Games</h3>
+            <p>Age-appropriate toys and structured games that grow with your child — selected fresh each day based on their developmental stage and ability.</p>
+          </div>
+        </div>
+        <div class="activity-tile reveal">
+          <span class="activity-icon">🎵</span>
+          <h3>Music & Movement</h3>
+          <p>Songs, dances, and rhymes in English y Español.</p>
+        </div>
+        <div class="activity-tile reveal">
+          <span class="activity-icon">🌱</span>
+          <h3>Nature & Science</h3>
+          <p>Simple explorations that teach curiosity about the world.</p>
+        </div>
+      </div>
+
+      <!-- Gallery Placeholder -->
+      <div class="gallery-placeholder reveal" style="margin-top: 60px;">
+        <h3>📸 Photo Gallery</h3>
+        <p>Photos coming soon — we'd love to show off our amazing kids and classroom! Drop your photos in and we'll fill this in.</p>
+        <div class="gallery-grid-mock">
+          <div class="gallery-mock-item">🎨</div>
+          <div class="gallery-mock-item">📚</div>
+          <div class="gallery-mock-item">🎵</div>
+          <div class="gallery-mock-item">🌸</div>
+          <div class="gallery-mock-item">🏃</div>
+          <div class="gallery-mock-item">🧩</div>
+          <div class="gallery-mock-item">🍎</div>
+          <div class="gallery-mock-item">⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-tag">💬 What Parents Say · Lo que Dicen los Padres</div>
+      <h2 class="section-title" style="color: white;">Families Love GloryBer's ❤️</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"I love love LOVE this daycare, the care provider, and her assistant (her mother). I toured many daycares and this is the first & only one that met all of my requirements. The daycare is new and on the main level of the home so it is filled with plenty of natural light. There are separate rooms for the infants, an art and music room, and the large play & learning space."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background: linear-gradient(135deg, var(--orange), var(--red));">M</div>
+            <div>
+              <div class="reviewer-name">Megan M.</div>
+              <div class="reviewer-source">CAreLulu.com · November 2021</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Ms. Gloria Elizabeth has been an amazing blessing to our son Elijah. We are excited to have him in this daycare. He has learned so much! We couldn't be happier with the care, attention, and love she gives every child."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background: linear-gradient(135deg, var(--blue), var(--purple));">S</div>
+            <div>
+              <div class="reviewer-name">Shanna B.H.</div>
+              <div class="reviewer-source">Facebook · July 2021</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <div class="section-tag tag-orange">Contact · Contacto</div>
+        <h2 class="section-title">Come Visit Us! 👋<br/>¡Visítanos!</h2>
+        <p>We'd love to show you around. Schedule a tour, ask a question, or just say hello — we're here for you and your little one.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon ci-red">📍</div>
+            <div class="contact-item-text">
+              <strong>Location</strong>
+              <span>Alexandria, VA (exact address provided upon inquiry)</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-blue">📞</div>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              <span><a href="tel:5713477360">(571) 347-7360</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-green">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span><a href="mailto:info@gloryberacademy.com">info@gloryberacademy.com</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-yellow">🕐</div>
+            <div class="contact-item-text">
+              <strong>Hours</strong>
+              <span>Monday – Friday: 7:00 AM – 5:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h3>Schedule a Visit 🏫</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Parent Name</label>
+            <input type="text" placeholder="Your full name" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="(555) 000-0000" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@email.com" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Child's Age</label>
+            <select>
+              <option value="">Select age</option>
+              <option>Infant (0–12 months)</option>
+              <option>Toddler (1–2 years)</option>
+              <option>2–3 years</option>
+              <option>3–4 years</option>
+              <option>4–5 years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Care Needed</label>
+            <select>
+              <option value="">Select type</option>
+              <option>Full-time (5 days/week)</option>
+              <option>Part-time (3 days/week)</option>
+              <option>Occasional / Drop-in</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea placeholder="Any questions or special needs we should know about?"></textarea>
+        </div>
+        <button class="submit-btn">¡Enviar! / Send Message 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">GloryBer's <span>Spanish</span> Academy</div>
+          <p class="footer-desc">A bilingual daycare in Alexandria, VA dedicated to nurturing the growth, development, and happiness of every child — in English and in Spanish.</p>
+          <div style="font-size: 1.8rem; letter-spacing: 6px;">🇺🇸 🌟 🇪🇸</div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:5713477360">(571) 347-7360</a></li>
+            <li><a href="mailto:info@gloryberacademy.com">info@gloryberacademy.com</a></li>
+            <li><a href="#">Alexandria, VA</a></li>
+            <li><a href="#">Mon–Fri: 7AM–5PM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2025 GloryBer's Spanish Academy · Made with <span>❤️</span> in Alexandria, VA
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth active nav
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(a => {
+        a.style.background = '';
+        if (a.getAttribute('href') === '#' + current) {
+          if (!a.classList.contains('nav-cta')) {
+            a.style.background = '#FFF5CC';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
