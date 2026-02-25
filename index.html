@@ -194,6 +194,135 @@
     .reviewer-name { font-weight: 800; color: white; }
     .reviewer-source { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 600; }
 
+    /* ===== SLOGAN BANNER ===== */
+    .slogan-banner {
+      background: linear-gradient(135deg, var(--dark) 0%, #2A1A4E 100%);
+      padding: 70px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slogan-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(255,209,102,0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 50%, rgba(6,214,160,0.08) 0%, transparent 60%);
+    }
+
+    .slogan-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .slogan-deco {
+      color: var(--yellow);
+      font-size: 1rem;
+      letter-spacing: 12px;
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+
+    .slogan-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    .slogan-esp {
+      color: var(--yellow);
+      display: block;
+    }
+
+    .slogan-eng {
+      color: var(--green);
+      display: block;
+    }
+
+    .slogan-translation {
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* ===== PHOTO FEATURE SECTION ===== */
+    .photo-feature {
+      background: linear-gradient(135deg, #FFF9E6 0%, #F0FDF9 100%);
+      padding: 100px 40px;
+    }
+
+    .photo-feature-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .photo-stack {
+      position: relative;
+      height: 480px;
+    }
+
+    .photo-main {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 80%;
+      height: 380px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    }
+
+    .photo-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-accent {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 58%;
+      height: 240px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+      border: 5px solid white;
+    }
+
+    .photo-accent img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+
+    .photo-badge {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background: var(--red);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(230,57,70,0.4);
+      animation: float 4s ease-in-out infinite;
+      z-index: 10;
+    }
+
     /* ===== CTA BANNER ===== */
     .cta-banner {
       background: linear-gradient(135deg, var(--red), var(--orange));
@@ -226,9 +355,19 @@
       .why-grid { grid-template-columns: 1fr 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .stats-strip { gap: 30px; padding: 24px 20px; }
+      .photo-feature-inner { grid-template-columns: 1fr; gap: 40px; }
+      .photo-feature-images { order: -1; }
+      .photo-stack { height: 360px; }
+      .photo-main { width: 85%; height: 300px; }
+      .photo-accent { width: 55%; height: 200px; }
+      .slogan-banner { padding: 50px 24px; }
     }
     @media (max-width: 600px) {
       .why-grid { grid-template-columns: 1fr; }
+      .photo-feature { padding: 60px 20px; }
+      .photo-stack { height: 300px; }
+      .photo-main { width: 90%; height: 240px; }
+      .photo-accent { width: 60%; height: 170px; }
     }
   </style>
 </head>
@@ -265,6 +404,42 @@
     <div class="stat"><div class="stat-num b">Ages 0–5</div><div class="stat-label">Infants to Pre-K</div></div>
     <div class="stat"><div class="stat-num r">Mon–Fri</div><div class="stat-label">7AM – 5PM</div></div>
     <div class="stat"><div class="stat-num y">Flexible</div><div class="stat-label">1 Day or Full-Time</div></div>
+  </div>
+
+  <!-- SLOGAN BANNER -->
+  <div class="slogan-banner">
+    <div class="slogan-inner">
+      <div class="slogan-deco">✦ ✦ ✦</div>
+      <h2 class="slogan-text">
+        <span class="slogan-esp">Enseñamos en el presente,</span>
+        <br/>
+        <span class="slogan-eng">educamos para el futuro.</span>
+      </h2>
+      <p class="slogan-translation">"We teach in the present, we educate for the future."</p>
+    </div>
+  </div>
+
+  <!-- PHOTO FEATURE SECTION -->
+  <div class="photo-feature">
+    <div class="photo-feature-inner">
+      <div class="photo-feature-text reveal">
+        <div class="section-tag tag-orange">Our Little Learners · Nuestros Pequeños</div>
+        <h2 class="section-title">Where Every Day Is Full of Wonder 🌟</h2>
+        <p class="section-desc">From art projects to story time, every moment at GloryBer's is designed to spark curiosity, build language skills, and fill little hearts with joy.</p>
+        <a href="activities.html" class="btn btn-primary" style="margin-top:28px;display:inline-block;">See Our Activities →</a>
+      </div>
+      <div class="photo-feature-images reveal">
+        <div class="photo-stack">
+          <div class="photo-main">
+            <img src="images/child-art-2.jpg" alt="Child drawing at GloryBer's Spanish Academy" />
+          </div>
+          <div class="photo-accent">
+            <img src="images/child-art-1.jpg" alt="Child at art table at GloryBer's Spanish Academy" />
+          </div>
+          <div class="photo-badge">🎨 ¡Creando!</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- WHY GLORYBER'S -->
