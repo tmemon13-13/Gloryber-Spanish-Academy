@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs | GloryBer's Spanish Academy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .program-card {
+      border-radius: 24px;
+      padding: 36px 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .program-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
+
+    .program-card.red    { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
+    .program-card.blue   { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
+    .program-card.green  { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
+    .program-card.yellow { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
+    .program-card.orange { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
+    .program-card.purple { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
+
+    .program-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+
+    .program-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .program-card p {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .program-esp {
+      margin-top: 12px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    /* MEALS SECTION */
+    .meals-section {
+      background: var(--dark);
+      padding: 80px 40px;
+    }
+
+    .meals-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .meals-text h2 { color: white; }
+    .meals-text p { color: rgba(255,255,255,0.75); line-height: 1.7; font-weight: 600; margin-top: 16px; }
+
+    .meals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .meal-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .meal-item span { font-size: 1.5rem; }
+
+    .meals-visual {
+      background: rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .meals-visual .big-emoji { font-size: 6rem; display: block; margin-bottom: 20px; }
+
+    .meals-visual h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .meals-visual p {
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    /* ENROLLMENT */
+    .enrollment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .enroll-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      text-align: center;
+      border-top: 5px solid var(--blue);
+    }
+    .enroll-card:nth-child(2) { border-top-color: var(--green); }
+    .enroll-card:nth-child(3) { border-top-color: var(--orange); }
+
+    .enroll-card .enroll-icon { font-size: 2.5rem; margin-bottom: 14px; display: block; }
+    .enroll-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .enroll-card p { font-size: 0.9rem; color: #666; line-height: 1.6; font-weight: 600; }
+
+    .enroll-note {
+      margin-top: 40px;
+      background: #FFF5CC;
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .enroll-note span { font-size: 2rem; }
+
+    @media (max-width: 900px) {
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .meals-inner { grid-template-columns: 1fr; gap: 40px; }
+      .enrollment-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .programs-grid { grid-template-columns: 1fr; }
+      .enrollment-grid { grid-template-columns: 1fr; }
+      .meals-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-tag tag-red">Programs · Programas</div>
+      <h1>What We Offer 🌈</h1>
+      <p>Every program is designed to spark curiosity, build bilingual skills, and keep kids happy — from infants all the way to Pre-K.</p>
+    </div>
+  </div>
+
+  <!-- PROGRAMS GRID -->
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:8px;">
+      <div class="section-tag tag-blue">Our Programs</div>
+      <h2 class="section-title">Something for Every Stage of Childhood ✨</h2>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card red reveal">
+        <span class="program-emoji">🍼</span>
+        <h3>Infant Care</h3>
+        <p>Warm, attentive care for our tiniest learners. We create a safe and soothing environment to support healthy development from day one — including separate infant rooms and monitored nap times.</p>
+        <div class="program-esp">Cuidado de Bebés</div>
+      </div>
+      <div class="program-card blue reveal">
+        <span class="program-emoji">🧸</span>
+        <h3>Toddler Program</h3>
+        <p>Learning through play, songs, and stories in both English and Spanish. Designed to build vocabulary, motor skills, and social confidence in our little explorers.</p>
+        <div class="program-esp">Programa para Niños Pequeños</div>
+      </div>
+      <div class="program-card green reveal">
+        <span class="program-emoji">🎓</span>
+        <h3>Pre-K Readiness</h3>
+        <p>Preparing children for kindergarten with age-appropriate literacy, numeracy, and bilingual language development — giving them a head start for school and beyond.</p>
+        <div class="program-esp">Preparación Pre-Kinder</div>
+      </div>
+      <div class="program-card yellow reveal">
+        <span class="program-emoji">🗣️</span>
+        <h3>Spanish Immersion</h3>
+        <p>Our signature bilingual curriculum weaves Spanish naturally into every part of the day — songs, instructions, stories, and play. Research shows bilingual children have stronger cognitive flexibility.</p>
+        <div class="program-esp">Inmersión en Español</div>
+      </div>
+      <div class="program-card orange reveal">
+        <span class="program-emoji">🎨</span>
+        <h3>Art & Music</h3>
+        <p>A dedicated art and music room where children express themselves through painting, drawing, crafts, and singing — fostering creativity and fine motor development.</p>
+        <div class="program-esp">Arte y Música</div>
+      </div>
+      <div class="program-card purple reveal">
+        <span class="program-emoji">🤸</span>
+        <h3>Physical Development</h3>
+        <p>Daily structured physical activity both indoors and outdoors. From playground time to tummy time for infants, movement is part of every day at GloryBer's.</p>
+        <div class="program-esp">Desarrollo Físico</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEALS -->
+  <div class="meals-section">
+    <div class="meals-inner">
+      <div class="meals-text reveal">
+        <div class="section-tag" style="background:rgba(255,255,255,0.12);color:white;">🍎 Healthy Meals · Comidas Saludables</div>
+        <h2 class="section-title">Nutritious, Home-Cooked Meals Every Day</h2>
+        <p>We believe good food fuels great learning. Every meal served at GloryBer's is home-cooked with care, using fresh and wholesome ingredients.</p>
+        <div class="meals-list">
+          <div class="meal-item"><span>🍳</span> Breakfast served from 7:00 AM</div>
+          <div class="meal-item"><span>🍓</span> Morning snack — fresh fruits & vegetables</div>
+          <div class="meal-item"><span>🍲</span> Hot home-cooked lunch with fruit & milk</div>
+          <div class="meal-item"><span>🥨</span> Nutritional afternoon snack</div>
+          <div class="meal-item"><span>🍼</span> Formula & baby food provided for infants</div>
+        </div>
+      </div>
+      <div class="meals-visual reveal">
+        <span class="big-emoji">🍽️</span>
+        <h3>Home-Made with Love</h3>
+        <p>No packaged food here. Every meal is prepared fresh in our kitchen — just like abuela would make it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENROLLMENT OPTIONS -->
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:8px;">
+      <div class="section-tag tag-green">Enrollment · Inscripción</div>
+      <h2 class="section-title">Flexible Care That Works for Your Family 📅</h2>
+      <p class="section-desc" style="margin:0 auto;">We believe every child deserves great care, regardless of schedule. That's why we offer multiple options — and never turn a family away.</p>
+    </div>
+    <div class="enrollment-grid">
+      <div class="enroll-card reveal">
+        <span class="enroll-icon">📅</span>
+        <h3>Full-Time</h3>
+        <p>5 days a week, Monday through Friday, 7AM–5PM. Ideal for working parents needing consistent, daily care.</p>
+      </div>
+      <div class="enroll-card reveal">
+        <span class="enroll-icon">🗓️</span>
+        <h3>Part-Time</h3>
+        <p>3 days a week or a custom schedule that fits your needs. Perfect for parents with hybrid work arrangements.</p>
+      </div>
+      <div class="enroll-card reveal">
+        <span class="enroll-icon">🚪</span>
+        <h3>Occasional / Drop-In</h3>
+        <p>Need care for just one day? We've got you covered. We accommodate drop-in care based on availability.</p>
+      </div>
+    </div>
+    <div class="enroll-note reveal">
+      <span>💛</span>
+      <div>No one is turned away. If your family needs care, we will do our best to make it work. <a href="contact.html" style="color:var(--blue);text-decoration:none;font-weight:800;">Contact us to discuss your needs →</a></div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>initShared('programs.html');</script>
+</body>
+</html>

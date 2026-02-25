@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activities | GloryBer's Spanish Academy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== SCHEDULE TABS ===== */
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      border: 2px solid #E5E5E5;
+      background: white;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: white;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ===== SCHEDULE TIMELINE ===== */
+    .schedule {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .schedule-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: stretch;
+      background: white;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .schedule-item:last-child { border-bottom: none; }
+
+    .schedule-time {
+      background: var(--dark);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px 12px;
+      line-height: 1.3;
+    }
+
+    .schedule-item:nth-child(even) .schedule-time { background: #252542; }
+
+    .schedule-body {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .schedule-emoji { font-size: 1.6rem; min-width: 36px; }
+
+    .schedule-body strong {
+      display: block;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .schedule-body span {
+      font-size: 0.88rem;
+      color: #777;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ===== ACTIVITIES TILES ===== */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .activity-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .activity-card:hover { transform: translateY(-6px); }
+    .activity-card .icon { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+    .activity-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .activity-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    /* ===== PHOTO SECTION ===== */
+    .photo-section {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      padding: 80px 40px;
+    }
+
+    .photo-grid {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .photo-card {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      background: white;
+      transition: transform 0.3s;
+    }
+    .photo-card:hover { transform: translateY(-6px); }
+
+    .photo-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-card-body {
+      padding: 24px;
+    }
+
+    .photo-card-body h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .photo-card-body p {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    /* ===== CELEBRATIONS ===== */
+    .celebrations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .celebration-tag {
+      background: white;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--dark);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+
+    @media (max-width: 900px) {
+      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .schedule-item { grid-template-columns: 110px 1fr; }
+    }
+    @media (max-width: 600px) {
+      .activities-grid { grid-template-columns: 1fr; }
+      .photo-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-tag tag-green">Activities · Actividades</div>
+      <h1>A Day Full of Fun & Learning 🎉</h1>
+      <p>Every day at GloryBer's is packed with play, discovery, movement, and language — structured to match your child's age and stage.</p>
+    </div>
+  </div>
+
+  <!-- DAILY ACTIVITIES OVERVIEW -->
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="section-tag tag-blue">What We Do Every Day</div>
+      <h2 class="section-title">Always Something to Discover 🌟</h2>
+    </div>
+    <div class="activities-grid">
+      <div class="activity-card reveal">
+        <span class="icon">🎨</span>
+        <h3>Art Projects</h3>
+        <p>Fine motor skills and creative exploration through painting, drawing, and crafts with a wide variety of materials.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="icon">📚</span>
+        <h3>Story Time</h3>
+        <p>Bilingual storytelling using colorful props and puppets — turning every story into an interactive language activity.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="icon">🏃</span>
+        <h3>Playground Time</h3>
+        <p>Outdoor play and exploration when weather permits, with fun indoor alternatives on rainy days.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="icon">🎵</span>
+        <h3>Music & Singing</h3>
+        <p>Songs, rhymes, and movement activities in both English and Spanish every single day.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="icon">🧩</span>
+        <h3>Educational Toys & Games</h3>
+        <p>Age-appropriate toys selected daily based on each child's developmental stage and abilities.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="icon">🌱</span>
+        <h3>Tummy Time & Motor Skills</h3>
+        <p>For our youngest learners — stimulating activities with textures, lights, and gym equipment to build gross motor skills.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY SCHEDULE -->
+  <div style="background:linear-gradient(135deg,#F0FDF9,#FFF9E6);padding:80px 40px;">
+    <div class="section-wrap" style="padding:0;">
+      <div class="reveal" style="margin-bottom:36px;">
+        <div class="section-tag tag-orange">Daily Schedule · Horario Diario</div>
+        <h2 class="section-title">A Structured Day, Made for Little Learners 🕐</h2>
+        <p class="section-desc">Tap to view the schedule for each age group.</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('infants', this)">🍼 Infants</button>
+        <button class="tab-btn" onclick="switchTab('toddlers', this)">🧸 Toddlers & Pre-K</button>
+      </div>
+
+      <!-- INFANTS SCHEDULE -->
+      <div class="tab-content active reveal" id="tab-infants">
+        <div class="schedule">
+          <div class="schedule-item">
+            <div class="schedule-time">7:00–8:30am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🍼</span><div><strong>Breakfast / Bottles</strong><span>Cereal, oatmeal, or formula for infants who haven't eaten at home.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">7:00–9:00am</div>
+            <div class="schedule-body"><span class="schedule-emoji">😴</span><div><strong>Morning Nap</strong><span>For infants who woke up early and have already had breakfast.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">9:00–9:30am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🍓</span><div><strong>Snack Time</strong><span>Fruits or vegetables for infants already eating solids.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">9:30–10:00am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🎵</span><div><strong>Music, Story & Tummy Time</strong><span>Singing, listening to music, and reading colorful infant books.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">10:00–10:30am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🤲</span><div><strong>Baby Massages</strong><span>Relaxing massages that help develop gross motor skills faster.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">10:30–11:00am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🍲</span><div><strong>Lunch / Bottles</strong><span>Home-made baby food and bottles.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">11:00am–12:30pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">😴</span><div><strong>Nap Time</strong><span>Placed in cribs and monitored every 10 minutes.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">12:30–1:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">🥑</span><div><strong>Snack Time</strong><span>Home-made baby food — fruits or vegetables.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">1:00–2:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">💡</span><div><strong>Textures, Lights & Gym Time</strong><span>Stimulating activities with different textures and lights. Motor skills: swings, jumperoo, bouncers, play stations.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">2:00–3:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">🍼</span><div><strong>Afternoon Bottles</strong><span>Bottles or baby food for infants who haven't eaten earlier.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">3:00–4:30pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">😴</span><div><strong>Afternoon Nap</strong><span>Placed in cribs and monitored every 10 minutes.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">4:30–5:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">🧸</span><div><strong>Free Play & Dismissal</strong><span>Manipulative toys and free time until pickup.</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODDLERS SCHEDULE -->
+      <div class="tab-content reveal" id="tab-toddlers">
+        <div class="schedule">
+          <div class="schedule-item">
+            <div class="schedule-time">7:00–8:30am</div>
+            <div class="schedule-body"><span class="schedule-emoji">👋</span><div><strong>Arrival, Welcome & Breakfast</strong><span>Good morning greetings and a nutritious breakfast to start the day.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">8:30–9:00am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🎮</span><div><strong>Free Play</strong><span>Child-led exploration and play.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">9:00–10:30am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🎓</span><div><strong>Learning Time</strong><span>Songs, math, language activities, vocabulary development, and art projects. Fine motor and creative skills exploration.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">10:30–11:30am</div>
+            <div class="schedule-body"><span class="schedule-emoji">🏃</span><div><strong>Playground</strong><span>Outdoor play with a variety of toys, weather permitting. Indoor activities on rainy days.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">11:30am–12:30pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">🍲</span><div><strong>Lunch</strong><span>A hot home-made lunch with fruit and milk.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">12:30–1:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">📖</span><div><strong>Story Time & Literary Activities</strong><span>A bilingual story read with colorful props and puppets, turned into an interactive language development activity.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">1:00–3:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">😴</span><div><strong>Quiet Time / Nap Time</strong><span>Rest and relaxation, with quiet activities for those who don't nap or wake up early.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">3:00–3:30pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">🍎</span><div><strong>Snack Time</strong><span>Nutritional family-style dining with child-initiated conversation.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">3:30–4:30pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">🏃</span><div><strong>Playground</strong><span>Afternoon outdoor play and physical activity.</span></div></div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-time">4:30–5:00pm</div>
+            <div class="schedule-body"><span class="schedule-emoji">👋</span><div><strong>Free Play & Dismissal</strong><span>Greeting parents and children upon pickup. Free play until everyone heads home.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO SECTION WITH OLD SITE IMAGES -->
+  <div class="photo-section">
+    <div style="max-width:1200px;margin:0 auto;text-align:center;" class="reveal">
+      <div class="section-tag tag-red">Photos · Fotos</div>
+      <h2 class="section-title">Activities in Action 📸</h2>
+      <p class="section-desc" style="margin:0 auto;">A glimpse into the fun, love, and learning that happens every day at GloryBer's.</p>
+    </div>
+    <div class="photo-grid">
+      <div class="photo-card reveal">
+        <img
+          src="https://gloryberacademy.com/assets/images/activities-2-816x663.jpg"
+          alt="Children enjoying daily activities at GloryBer's Spanish Academy"
+          onerror="this.parentElement.style.display='none'"
+        />
+        <div class="photo-card-body">
+          <h3>Daily Activities 🎨</h3>
+          <p>Children explore, create, and play every day in a warm and nurturing environment designed just for them.</p>
+        </div>
+      </div>
+      <div class="photo-card reveal">
+        <img
+          src="https://gloryberacademy.com/assets/images/valentines-popup-752x611.jpg"
+          alt="Valentine's Day celebration at GloryBer's Spanish Academy 2022"
+          onerror="this.parentElement.style.display='none'"
+        />
+        <div class="photo-card-body">
+          <h3>Valentine's Day 2022 💝</h3>
+          <p>We celebrate every holiday with dancing, games, food, and gift exchanges — teaching children the value of love and togetherness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CELEBRATIONS SECTION -->
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-tag tag-purple">Celebrations · Celebraciones</div>
+      <h2 class="section-title">Holidays & Special Events All Year 🎊</h2>
+      <p class="section-desc">We celebrate every season and milestone with our families. Every parent is informed and involved!</p>
+      <div class="celebrations">
+        <div class="celebration-tag">💝 Valentine's Day</div>
+        <div class="celebration-tag">🐣 Easter Week</div>
+        <div class="celebration-tag">🎂 Birthday Parties</div>
+        <div class="celebration-tag">💧 Mud Day</div>
+        <div class="celebration-tag">☀️ Summer Water Activities</div>
+        <div class="celebration-tag">🎃 Halloween</div>
+        <div class="celebration-tag">🦃 Thanksgiving</div>
+        <div class="celebration-tag">🎄 Christmas</div>
+        <div class="celebration-tag">🌟 And Many More!</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    initShared('activities.html');
+
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | GloryBer's Spanish Academy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* INFO SIDE */
+    .contact-info h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.6rem;
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .contact-info > p {
+      color: #666;
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #FAFAFA;
+      border-radius: 16px;
+      padding: 16px 20px;
+      border: 1px solid #F0F0F0;
+    }
+
+    .contact-item-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .ci-red    { background: #FFE0E3; }
+    .ci-blue   { background: #D6EFFF; }
+    .ci-green  { background: #CAFFEF; }
+    .ci-yellow { background: #FFF5CC; }
+
+    .contact-item-text strong {
+      display: block;
+      font-weight: 800;
+      color: var(--dark);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .contact-item-text span, .contact-item-text a {
+      color: #555;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .contact-item-text a { color: var(--blue); font-weight: 700; }
+
+    /* MAP PLACEHOLDER -->
+    .map-placeholder {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #E8F8FF, #D4FFF5);
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+    }
+    .map-placeholder p {
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .map-placeholder span {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .map-placeholder small {
+      font-size: 0.82rem;
+      color: #888;
+      font-weight: 600;
+    }
+
+    /* FORM SIDE */
+    .contact-form-wrap {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      border-radius: 28px;
+      padding: 48px 40px;
+    }
+
+    .contact-form-wrap h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 28px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+      display: block;
+      font-weight: 800;
+      font-size: 0.82rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #E5E5E5;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+      background: white;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--blue); }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--red);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(230,57,70,0.4);
+    }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    /* SUCCESS / ERROR */
+    #form-success {
+      display: none;
+      background: #D4FFF5;
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    #form-success .success-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+
+    #form-success h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    #form-success p { font-weight: 600; color: #444; }
+
+    #form-error {
+      display: none;
+      background: #FFE0E3;
+      border: 2px solid var(--red);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: var(--red);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .contact-form-wrap { padding: 32px 24px; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-tag tag-orange">Contact · Contacto</div>
+      <h1>Come Visit Us! 👋<br/>¡Visítanos!</h1>
+      <p>We'd love to show you around, answer your questions, and welcome your family to GloryBer's.</p>
+    </div>
+  </div>
+
+  <div class="section-wrap">
+    <div class="contact-layout">
+
+      <!-- INFO -->
+      <div class="contact-info reveal">
+        <div class="section-tag tag-blue">Get In Touch</div>
+        <h2>Let's Connect 🌟</h2>
+        <p>Whether you want to schedule a tour, ask about enrollment, or just say hello — we're here and happy to help.</p>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon ci-red">📍</div>
+            <div class="contact-item-text">
+              <strong>Location</strong>
+              <span>Alexandria, VA (exact address provided upon inquiry)</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-blue">📞</div>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              <a href="tel:5713477360">(571) 347-7360</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-green">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <a href="mailto:info@gloryberacademy.com">info@gloryberacademy.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-yellow">🕐</div>
+            <div class="contact-item-text">
+              <strong>Hours</strong>
+              <span>Monday – Friday: 7:00 AM – 5:00 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <span>📍</span>
+          <p>Located in Alexandria, VA</p>
+          <small>Exact address provided after initial inquiry to protect the privacy of our home-based center.</small>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="contact-form-wrap reveal">
+        <h3>Schedule a Visit 🏫</h3>
+
+        <div id="form-success">
+          <span class="success-icon">🎉</span>
+          <h4>¡Mensaje Enviado!</h4>
+          <p>We received your message and will be in touch very soon. Can't wait to meet your little one!</p>
+        </div>
+
+        <div id="form-error">
+          Oops! Something went wrong. Please try again or call us at (571) 347-7360.
+        </div>
+
+        <!--
+          FORMSPREE SETUP:
+          1. Go to https://formspree.io → create a free account
+          2. Create a new form → copy your Form ID (e.g. xpwzabcd)
+          3. Replace YOUR_FORM_ID below with your actual ID
+        -->
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Parent Name *</label>
+              <input type="text" name="name" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" name="phone" placeholder="(555) 000-0000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" name="email" placeholder="you@email.com" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Child's Age</label>
+              <select name="child_age">
+                <option value="">Select age</option>
+                <option>Infant (0–12 months)</option>
+                <option>Toddler (1–2 years)</option>
+                <option>2–3 years</option>
+                <option>3–4 years</option>
+                <option>4–5 years</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Care Needed</label>
+              <select name="care_type">
+                <option value="">Select type</option>
+                <option>Full-time (5 days/week)</option>
+                <option>Part-time (3 days/week)</option>
+                <option>Occasional / Drop-in</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Message (optional)</label>
+            <textarea name="message" placeholder="Questions, special needs, or anything you'd like us to know..."></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="New Inquiry from GloryBer's Website 🌟" />
+          <button type="submit" class="submit-btn" id="submit-btn">¡Enviar! / Send Message 🚀</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    initShared('contact.html');
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitBtn.textContent = 'Sending... ⏳';
+        submitBtn.disabled = true;
+        errorMsg.style.display = 'none';
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (response.ok) {
+            form.style.display = 'none';
+            successMsg.style.display = 'block';
+          } else { throw new Error(); }
+        } catch {
+          errorMsg.style.display = 'block';
+          submitBtn.textContent = '¡Enviar! / Send Message 🚀';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  </script>
+</body>
+</html>

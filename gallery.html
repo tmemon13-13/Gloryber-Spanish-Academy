@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | GloryBer's Spanish Academy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* FILTER TABS */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .filter-btn {
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: 2px solid #E5E5E5;
+      background: white;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--red);
+      background: var(--red);
+      color: white;
+    }
+
+    /* GALLERY GRID */
+    .gallery-grid {
+      columns: 3;
+      column-gap: 20px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-label {
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    /* PLACEHOLDER TILES (until real photos are added) */
+    .gallery-placeholder-tile {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      border: 3px dashed #DDD;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .gallery-placeholder-tile .ph-icon { font-size: 3rem; }
+    .gallery-placeholder-tile p {
+      font-size: 0.82rem;
+      color: #AAA;
+      font-weight: 600;
+    }
+
+    /* Real images from old site */
+    .real-photos-section {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      padding: 80px 40px;
+    }
+
+    .real-photos-grid {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .real-photo-card {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      background: white;
+      transition: transform 0.3s;
+    }
+    .real-photo-card:hover { transform: translateY(-6px); }
+
+    .real-photo-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .real-photo-caption {
+      padding: 20px 24px;
+    }
+    .real-photo-caption h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .real-photo-caption p {
+      font-size: 0.88rem;
+      color: #777;
+      font-weight: 600;
+    }
+
+    /* UPLOAD PROMPT */
+    .upload-prompt {
+      background: white;
+      border: 3px dashed var(--blue);
+      border-radius: 24px;
+      padding: 60px 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .upload-prompt .up-icon { font-size: 4rem; margin-bottom: 16px; display: block; }
+
+    .upload-prompt h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .upload-prompt p {
+      color: #777;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid { columns: 2; }
+      .real-photos-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { columns: 1; }
+      .real-photos-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-tag tag-purple">Gallery · Galería</div>
+      <h1>Life at GloryBer's 📸</h1>
+      <p>Smiles, crafts, celebrations, and everything in between. A peek into the joy that fills our center every day.</p>
+    </div>
+  </div>
+
+  <!-- REAL PHOTOS FROM OLD SITE -->
+  <div class="real-photos-section">
+    <div style="max-width:1200px;margin:0 auto;text-align:center;" class="reveal">
+      <div class="section-tag tag-red">Photos · Fotos</div>
+      <h2 class="section-title">Moments We Love to Capture ❤️</h2>
+    </div>
+    <div class="real-photos-grid">
+      <div class="real-photo-card reveal">
+        <img
+          src="https://gloryberacademy.com/assets/images/activities-2-816x663.jpg"
+          alt="Daily activities at GloryBer's Spanish Academy"
+          onerror="this.style.display='none'"
+        />
+        <div class="real-photo-caption">
+          <h3>Daily Activities 🎨</h3>
+          <p>Learning, playing, and growing — every single day.</p>
+        </div>
+      </div>
+      <div class="real-photo-card reveal">
+        <img
+          src="https://gloryberacademy.com/assets/images/valentines-popup-752x611.jpg"
+          alt="Valentine's Day celebration 2022"
+          onerror="this.style.display='none'"
+        />
+        <div class="real-photo-caption">
+          <h3>Valentine's Day 2022 💝</h3>
+          <p>Dancing, games, snacks, and gift exchanges with our little ones.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD PROMPT -->
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="upload-prompt reveal">
+        <span class="up-icon">📷</span>
+        <h3>More Photos Coming Soon!</h3>
+        <p>We're building out this gallery — drop your photos and we'll add them right here. The more the merrier!</p>
+        <a href="contact.html" class="btn btn-blue">Get in Touch to Share Photos →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER GALLERY (remove tiles as real photos are added) -->
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:40px;">
+      <div class="section-tag tag-green">Add Your Photos Here</div>
+      <h2 class="section-title">Gallery Sections 🖼️</h2>
+      <p class="section-desc" style="margin:0 auto;">These categories are ready to fill in. Replace placeholder tiles with real photos using the <code>img</code> tag pointing to your <code>images/</code> folder.</p>
+    </div>
+
+    <!-- Filter buttons — wire up with JS once photos are added -->
+    <div class="filter-bar">
+      <button class="filter-btn active">All Photos</button>
+      <button class="filter-btn">🎨 Arts & Crafts</button>
+      <button class="filter-btn">🏃 Playground</button>
+      <button class="filter-btn">🎉 Celebrations</button>
+      <button class="filter-btn">📚 Learning</button>
+      <button class="filter-btn">🍎 Mealtime</button>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- TO ADD REAL PHOTOS: replace a placeholder div below with:
+        <div class="gallery-item">
+          <img src="images/your-photo.jpg" alt="Description" />
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-label">Photo Caption</div>
+          </div>
+        </div>
+      -->
+      <div class="gallery-placeholder-tile" style="height:220px;"><span class="ph-icon">🎨</span><p>Arts & Crafts Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:300px;"><span class="ph-icon">🏃</span><p>Playground Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:200px;"><span class="ph-icon">📚</span><p>Story Time Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:260px;"><span class="ph-icon">🎉</span><p>Celebration Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:200px;"><span class="ph-icon">🍎</span><p>Mealtime Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:280px;"><span class="ph-icon">🎵</span><p>Music & Dance Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:220px;"><span class="ph-icon">🌱</span><p>Nature Activity Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:240px;"><span class="ph-icon">🧩</span><p>Playtime Photo</p></div>
+      <div class="gallery-placeholder-tile" style="height:200px;"><span class="ph-icon">💝</span><p>Holiday Photo</p></div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>initShared('gallery.html');</script>
+</body>
+</html>
