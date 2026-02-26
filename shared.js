@@ -18,6 +18,7 @@ function getNavHTML(activePage) {
     <a href="index.html" class="nav-logo">GloryBer's <span>Spanish</span> <em>Academy</em></a>
     <ul class="nav-links" id="nav-links">
       ${links}
+      <li><a href="espanol.html" class="nav-esp ${activePage === 'espanol.html' ? 'active' : ''}">🇪🇸 En Español</a></li>
       <li><a href="contact.html" class="nav-cta ${activePage === 'contact.html' ? 'active' : ''}">Contact Us</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -30,6 +31,7 @@ function getNavHTML(activePage) {
     <div class="mobile-menu-logo">GloryBer's<br/><span>Spanish Academy</span></div>
     <ul class="mobile-nav-links">
       ${pages.map(p => `<li><a href="${p.href}" class="${p.href === activePage ? 'active' : ''}">${p.label}</a></li>`).join('')}
+      <li><a href="espanol.html" class="${activePage === 'espanol.html' ? 'active' : ''}">🇪🇸 En Español</a></li>
       <li><a href="contact.html" class="mobile-cta">📞 Contact Us</a></li>
     </ul>
     <div class="mobile-menu-contact">

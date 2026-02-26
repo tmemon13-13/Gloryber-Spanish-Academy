@@ -559,3 +559,19 @@ footer {
   * { cursor: auto !important; }
   .custom-cursor { display: none; }
 }
+
+/* ===== EN ESPAÑOL NAV BUTTON ===== */
+.nav-esp {
+  background: linear-gradient(135deg, #E63946, #FF6B35) !important;
+  color: white !important;
+  border-radius: 50px;
+  font-weight: 800 !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.nav-esp:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(230,57,70,0.4) !important;
+  background: linear-gradient(135deg, #E63946, #FF6B35) !important;
+  color: white !important;
+}

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>En Español | GloryBer's Spanish Academy | Alexandria, VA</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== HERO ===== */
+    #inicio {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      background: linear-gradient(135deg, #FFF9E6 0%, #E8F8FF 50%, #FFF0F1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 40px 20px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero-content h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .accent-red  { color: var(--red); }
+    .accent-blue { color: var(--blue); }
+
+    .hero-subtitle {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-flags {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      letter-spacing: 8px;
+    }
+
+    /* ===== STATS ===== */
+    .stats-strip {
+      background: var(--dark);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; color: white; }
+    .stat-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .stat-num.y { color: var(--yellow); }
+    .stat-num.g { color: var(--green); }
+    .stat-num.b { color: #60C8FF; }
+    .stat-num.r { color: #FF8E8E; }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ===== SLOGAN ===== */
+    .slogan-banner {
+      background: linear-gradient(135deg, var(--dark) 0%, #2A1A4E 100%);
+      padding: 70px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slogan-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(255,209,102,0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 50%, rgba(6,214,160,0.08) 0%, transparent 60%);
+    }
+
+    .slogan-inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .slogan-deco { color: var(--yellow); font-size: 1rem; letter-spacing: 12px; margin-bottom: 24px; opacity: 0.7; }
+
+    .slogan-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    .slogan-esp { color: var(--yellow); display: block; }
+    .slogan-eng { color: var(--green); display: block; }
+    .slogan-translation { color: rgba(255,255,255,0.5); font-style: italic; font-weight: 600; font-size: 1rem; }
+
+    /* ===== SECTION DIVIDER ===== */
+    .page-section {
+      padding: 90px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header { margin-bottom: 48px; }
+
+    /* ===== ABOUT ===== */
+    .about-wrap {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      padding: 90px 40px;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .about-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--red), var(--yellow), var(--green), var(--blue));
+    }
+
+    .about-avatar {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--dark); margin-bottom: 4px; }
+    .about-card .role { color: var(--blue); font-weight: 700; font-size: 0.9rem; margin-bottom: 16px; }
+    .about-card p { color: #666; line-height: 1.7; font-weight: 600; }
+
+    .lang-pill {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin: 4px 4px 4px 0;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .value-item {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--dark);
+    }
+
+    /* ===== PROGRAMS ===== */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .program-card {
+      border-radius: 22px;
+      padding: 32px 24px;
+      transition: transform 0.3s;
+    }
+    .program-card:hover { transform: translateY(-6px); }
+    .program-card.red    { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
+    .program-card.blue   { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
+    .program-card.green  { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
+    .program-card.yellow { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
+    .program-card.orange { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
+    .program-card.purple { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
+
+    .program-emoji { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+    .program-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--dark); margin-bottom: 8px; }
+    .program-card p { font-size: 0.9rem; color: #444; line-height: 1.6; font-weight: 600; }
+
+    /* ===== ACTIVITIES ===== */
+    .activities-bg {
+      background: linear-gradient(135deg, #F0FDF9, #FFF9E6);
+      padding: 90px 40px;
+    }
+
+    .activities-grid {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .activity-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .activity-card:hover { transform: translateY(-5px); }
+    .activity-card .icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+    .activity-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.15rem; color: var(--dark); margin-bottom: 6px; }
+    .activity-card p { font-size: 0.87rem; color: #666; line-height: 1.6; font-weight: 600; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-section {
+      background: var(--dark);
+      padding: 80px 40px;
+    }
+
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+      text-align: left;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .stars { color: var(--yellow); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .testimonial-card p { color: rgba(255,255,255,0.85); line-height: 1.7; font-weight: 600; margin-bottom: 18px; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: white; }
+    .reviewer-name { font-weight: 800; color: white; }
+    .reviewer-source { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+
+    /* ===== CONTACT ===== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .contact-info h2 { font-family: 'Fredoka One', cursive; font-size: 2.4rem; color: var(--dark); line-height: 1.15; margin-bottom: 16px; }
+    .contact-info > p { color: #666; font-weight: 600; line-height: 1.7; margin-bottom: 32px; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 12px; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #FAFAFA;
+      border-radius: 14px;
+      padding: 14px 18px;
+      border: 1px solid #F0F0F0;
+    }
+
+    .contact-item-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .ci-red { background: #FFE0E3; }
+    .ci-blue { background: #D6EFFF; }
+    .ci-green { background: #CAFFEF; }
+    .ci-yellow { background: #FFF5CC; }
+
+    .contact-item-text strong { display: block; font-weight: 800; color: var(--dark); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .contact-item-text span, .contact-item-text a { color: #555; font-weight: 600; text-decoration: none; }
+    .contact-item-text a { color: var(--blue); font-weight: 700; }
+
+    .contact-form-wrap {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      border-radius: 26px;
+      padding: 44px 38px;
+    }
+
+    .contact-form-wrap h3 { font-family: 'Fredoka One', cursive; font-size: 1.7rem; color: var(--dark); margin-bottom: 26px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-weight: 800; font-size: 0.8rem; color: var(--dark); margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      border: 2px solid #E5E5E5; border-radius: 11px;
+      font-family: 'Nunito', sans-serif; font-size: 0.93rem;
+      font-weight: 600; color: var(--dark); background: white;
+      transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .submit-btn {
+      width: 100%; padding: 15px;
+      background: var(--red); color: white; border: none;
+      border-radius: 13px; font-family: 'Fredoka One', cursive;
+      font-size: 1.15rem; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s; margin-top: 6px;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(230,57,70,0.4); }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    #form-success {
+      display: none; background: #D4FFF5; border: 2px solid var(--green);
+      border-radius: 14px; padding: 26px; text-align: center;
+    }
+    #form-success .success-icon { font-size: 3rem; margin-bottom: 10px; display: block; }
+    #form-success h4 { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--dark); margin-bottom: 6px; }
+    #form-success p { font-weight: 600; color: #444; }
+
+    #form-error {
+      display: none; background: #FFE0E3; border: 2px solid var(--red);
+      border-radius: 14px; padding: 14px 18px; margin-bottom: 18px;
+      font-weight: 700; color: var(--red); text-align: center;
+    }
+
+    /* ===== CTA ===== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .cta-banner h2 { font-family: 'Fredoka One', cursive; font-size: clamp(2rem, 4vw, 3rem); color: white; margin-bottom: 14px; }
+    .cta-banner p { color: rgba(255,255,255,0.9); font-size: 1.05rem; font-weight: 600; margin-bottom: 28px; }
+    .btn-white { background: white; color: var(--red); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+    .btn-white:hover { box-shadow: 0 12px 35px rgba(0,0,0,0.3); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .stats-strip { gap: 30px; padding: 22px 20px; }
+    }
+
+    @media (max-width: 600px) {
+      .programs-grid { grid-template-columns: 1fr; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .about-wrap, .activities-bg { padding: 60px 20px; }
+      .page-section { padding: 60px 20px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .slogan-banner { padding: 50px 20px; }
+      .contact-form-wrap { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section id="inicio">
+    <div style="position:absolute;inset:0;pointer-events:none;">
+      <div class="shape" style="width:300px;height:300px;background:var(--yellow);top:-50px;left:-80px;animation-delay:0s;"></div>
+      <div class="shape" style="width:200px;height:200px;background:var(--blue);bottom:100px;right:-60px;animation-delay:1.5s;"></div>
+      <div class="shape" style="width:150px;height:150px;background:var(--green);top:200px;left:5%;animation-delay:3s;"></div>
+      <div class="shape" style="width:100px;height:100px;background:var(--red);top:100px;right:15%;animation-delay:2s;"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🌟 Alexandria, VA · Est. 2021</div>
+      <h1>
+        <span class="accent-red">GloryBer's</span><br/>
+        <span class="accent-blue">Spanish</span> Academy
+      </h1>
+      <div class="hero-subtitle">¡Aprender, Crecer, Brillar!</div>
+      <p>Una guardería bilingüe y amorosa donde los pequeños aprenden, crecen y brillan — en inglés <em>y</em> en español.</p>
+      <div class="hero-buttons">
+        <a href="#contacto" class="btn btn-primary">Visítenos 🏫</a>
+        <a href="#programas" class="btn btn-secondary">Nuestros Programas →</a>
+      </div>
+      <div class="hero-flags">🇺🇸 🌟 🇪🇸</div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat"><div class="stat-num y">Est. 2021</div><div class="stat-label">Fundada</div></div>
+    <div class="stat"><div class="stat-num g">Bilingüe</div><div class="stat-label">Inglés y Español</div></div>
+    <div class="stat"><div class="stat-num b">0–5 Años</div><div class="stat-label">Bebés a Pre-K</div></div>
+    <div class="stat"><div class="stat-num r">Lun–Vie</div><div class="stat-label">7AM – 5PM</div></div>
+    <div class="stat"><div class="stat-num y">Flexible</div><div class="stat-label">1 Día o Tiempo Completo</div></div>
+  </div>
+
+  <!-- SLOGAN -->
+  <div class="slogan-banner">
+    <div class="slogan-inner">
+      <div class="slogan-deco">✦ ✦ ✦</div>
+      <h2 class="slogan-text">
+        <span class="slogan-esp">Enseñamos en el presente,</span>
+        <span class="slogan-eng">educamos para el futuro.</span>
+      </h2>
+    </div>
+  </div>
+
+  <!-- SOBRE NOSOTROS -->
+  <div class="about-wrap" id="nosotros">
+    <div class="about-inner">
+      <div class="reveal">
+        <div class="about-card">
+          <div class="about-avatar">👩‍🏫</div>
+          <h3>Gloria Franco & Gloria Elizabeth Franco</h3>
+          <div class="role">Fundadora & Maestra Coordinadora</div>
+          <p>Un dúo madre e hija que combina décadas de experiencia, amor genuino por los niños y una profunda pasión por la educación bilingüe.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="section-tag tag-blue">Sobre Nosotros</div>
+        <h2 class="section-title">Más Que una Guardería — Un Segundo Hogar 🏡</h2>
+        <p class="section-desc">Fundada en 2021 en Alexandria, VA, GloryBer's Spanish Academy es un centro de aprendizaje bilingüe en el hogar, dedicado a brindar un ambiente seguro, amoroso y rico en idiomas para niños desde bebés hasta preescolar.</p>
+        <div style="margin-top:18px;">
+          <span class="lang-pill">🗣️ Inglés</span>
+          <span class="lang-pill">🗣️ Español</span>
+          <span class="lang-pill">🎨 Arte</span>
+          <span class="lang-pill">🍽️ Comidas Saludables</span>
+        </div>
+        <div class="values-grid">
+          <div class="value-item">☀️ Espacios con luz natural</div>
+          <div class="value-item">🍎 Comidas caseras nutritivas</div>
+          <div class="value-item">🎓 Personal capacitado</div>
+          <div class="value-item">🤸 Actividad física diaria</div>
+          <div class="value-item">🚪 Nadie es rechazado</div>
+          <div class="value-item">🌎 Inmersión bilingüe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMAS -->
+  <div class="page-section" id="programas">
+    <div class="section-header reveal" style="text-align:center;">
+      <div class="section-tag tag-red">Nuestros Programas</div>
+      <h2 class="section-title">Lo Que Ofrecemos 🌈</h2>
+      <p class="section-desc" style="margin:0 auto;">Cada programa está diseñado para despertar la curiosidad, desarrollar habilidades bilingües y mantener a los niños felices.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card red reveal">
+        <span class="program-emoji">🍼</span>
+        <h3>Cuidado de Bebés</h3>
+        <p>Atención cálida y cuidadosa para nuestros aprendices más pequeños, con cunas monitoreadas y rutinas adaptadas a cada bebé.</p>
+      </div>
+      <div class="program-card blue reveal">
+        <span class="program-emoji">🧸</span>
+        <h3>Programa para Niños Pequeños</h3>
+        <p>Aprendizaje a través del juego, canciones e historias en inglés y español, desarrollando vocabulario y habilidades motoras.</p>
+      </div>
+      <div class="program-card green reveal">
+        <span class="program-emoji">🎓</span>
+        <h3>Preparación Pre-Kinder</h3>
+        <p>Preparamos a los niños para el jardín de infantes con actividades de lectoescritura, matemáticas y desarrollo bilingüe.</p>
+      </div>
+      <div class="program-card yellow reveal">
+        <span class="program-emoji">🗣️</span>
+        <h3>Inmersión en Español</h3>
+        <p>Nuestro currículo bilingüe integra el español de forma natural en cada parte del día — canciones, instrucciones, cuentos y juegos.</p>
+      </div>
+      <div class="program-card orange reveal">
+        <span class="program-emoji">🍎</span>
+        <h3>Comidas Saludables</h3>
+        <p>Ofrecemos comidas y meriendas nutritivas y caseras durante todo el día para alimentar el aprendizaje y el crecimiento.</p>
+      </div>
+      <div class="program-card purple reveal">
+        <span class="program-emoji">📅</span>
+        <h3>Inscripción Flexible</h3>
+        <p>¿Necesita cuidado solo un día a la semana o todos los días? Nos adaptamos a todos los horarios. Nadie es rechazado.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVIDADES -->
+  <div class="activities-bg" id="actividades">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-tag tag-green">Actividades Diarias</div>
+        <h2 class="section-title">Un Día Lleno de Diversión y Aprendizaje 🎉</h2>
+        <p class="section-desc" style="margin:0 auto;">Cada día está repleto de actividades diseñadas para hacer crecer mentes pequeñas y grandes sonrisas.</p>
+      </div>
+      <div class="activities-grid">
+        <div class="activity-card reveal">
+          <span class="icon">🎨</span>
+          <h3>Proyectos de Arte</h3>
+          <p>Exploración creativa y de motricidad fina a través de pintura, dibujo y manualidades.</p>
+        </div>
+        <div class="activity-card reveal">
+          <span class="icon">📚</span>
+          <h3>Hora del Cuento</h3>
+          <p>Narración bilingüe con títeres y accesorios de colores para el desarrollo del lenguaje.</p>
+        </div>
+        <div class="activity-card reveal">
+          <span class="icon">🏃</span>
+          <h3>Juego al Aire Libre</h3>
+          <p>Actividad física diaria al aire libre o en interiores, llueva o haga sol.</p>
+        </div>
+        <div class="activity-card reveal">
+          <span class="icon">🎵</span>
+          <h3>Música y Canto</h3>
+          <p>Canciones, bailes y rimas en inglés y español todos los días.</p>
+        </div>
+        <div class="activity-card reveal">
+          <span class="icon">🧩</span>
+          <h3>Juguetes Educativos</h3>
+          <p>Juguetes seleccionados diariamente según la etapa de desarrollo de cada niño.</p>
+        </div>
+        <div class="activity-card reveal">
+          <span class="icon">🌱</span>
+          <h3>Naturaleza y Ciencias</h3>
+          <p>Exploraciones sencillas que enseñan curiosidad sobre el mundo que nos rodea.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIOS -->
+  <div class="testimonials-section">
+    <div class="testimonials-inner">
+      <div class="section-tag" style="background:rgba(255,255,255,0.15);color:white;">💬 Lo Que Dicen los Padres</div>
+      <h2 class="section-title" style="color:white;">Las Familias Aman GloryBer's ❤️</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Amo, amo, AMO esta guardería, la proveedora de cuidado y su asistente. Visité muchas guarderías y esta es la primera y única que cumplió todos mis requisitos. Está llena de luz natural, con habitaciones separadas para los bebés, una sala de arte y música, y un gran espacio de juego y aprendizaje."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,var(--orange),var(--red));">M</div>
+            <div>
+              <div class="reviewer-name">Megan M.</div>
+              <div class="reviewer-source">CAreLulu.com · Noviembre 2021</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"La señorita Gloria Elizabeth ha sido una bendición increíble para nuestro hijo Elías. Estamos muy contentos de tenerlo en esta guardería. ¡Ha aprendido muchísimo! No podríamos estar más felices con el cuidado, la atención y el amor que ella le brinda a cada niño."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,var(--blue),var(--purple));">S</div>
+            <div>
+              <div class="reviewer-name">Shanna B.H.</div>
+              <div class="reviewer-source">Facebook · Julio 2021</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="page-section" id="contacto">
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <div class="section-tag tag-orange">Contáctenos</div>
+        <h2>¡Venga a Visitarnos! 👋</h2>
+        <p>Nos encantaría mostrarle nuestro espacio, responder sus preguntas y darle la bienvenida a la familia GloryBer's.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon ci-red">📍</div>
+            <div class="contact-item-text">
+              <strong>Ubicación</strong>
+              <span>Alexandria, VA (dirección exacta proporcionada al contactar)</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-blue">📞</div>
+            <div class="contact-item-text">
+              <strong>Teléfono</strong>
+              <a href="tel:5713477360">(571) 347-7360</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-green">✉️</div>
+            <div class="contact-item-text">
+              <strong>Correo Electrónico</strong>
+              <a href="mailto:info@gloryberacademy.com">info@gloryberacademy.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon ci-yellow">🕐</div>
+            <div class="contact-item-text">
+              <strong>Horario</strong>
+              <span>Lunes – Viernes: 7:00 AM – 5:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal">
+        <h3>Programe una Visita 🏫</h3>
+
+        <div id="form-success">
+          <span class="success-icon">🎉</span>
+          <h4>¡Mensaje Enviado!</h4>
+          <p>Recibimos su mensaje y nos pondremos en contacto muy pronto. ¡Esperamos conocer a su pequeño!</p>
+        </div>
+
+        <div id="form-error">
+          ¡Ups! Algo salió mal. Por favor intente de nuevo o llámenos al (571) 347-7360.
+        </div>
+
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre del Padre/Madre *</label>
+              <input type="text" name="name" placeholder="Su nombre completo" required />
+            </div>
+            <div class="form-group">
+              <label>Teléfono *</label>
+              <input type="tel" name="phone" placeholder="(555) 000-0000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico *</label>
+            <input type="email" name="email" placeholder="usted@correo.com" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Edad del Niño/a</label>
+              <select name="child_age">
+                <option value="">Seleccione la edad</option>
+                <option>Bebé (0–12 meses)</option>
+                <option>Niño pequeño (1–2 años)</option>
+                <option>2–3 años</option>
+                <option>3–4 años</option>
+                <option>4–5 años</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tipo de Cuidado</label>
+              <select name="care_type">
+                <option value="">Seleccione el tipo</option>
+                <option>Tiempo completo (5 días/semana)</option>
+                <option>Medio tiempo (3 días/semana)</option>
+                <option>Ocasional / Por día</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mensaje (opcional)</label>
+            <textarea name="message" placeholder="¿Preguntas o necesidades especiales que debamos saber?"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="Nueva Consulta desde GloryBer's (En Español) 🌟" />
+          <button type="submit" class="submit-btn" id="submit-btn">¡Enviar Mensaje! 🚀</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2>¿Lista para Visitarnos? 🏫</h2>
+    <p>Nos encantaría mostrarle nuestro espacio y conocer a su familia. ¡Programe una visita hoy!</p>
+    <a href="#contacto" class="btn btn-white">Contáctenos →</a>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    initShared('espanol.html');
+
+    // Contact form
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitBtn.textContent = 'Enviando... ⏳';
+        submitBtn.disabled = true;
+        errorMsg.style.display = 'none';
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (response.ok) {
+            form.style.display = 'none';
+            successMsg.style.display = 'block';
+          } else { throw new Error(); }
+        } catch {
+          errorMsg.style.display = 'block';
+          submitBtn.textContent = '¡Enviar Mensaje! 🚀';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
