@@ -16,11 +16,28 @@ function getNavHTML(activePage) {
   return `
   <nav>
     <a href="index.html" class="nav-logo">GloryBer's <span>Spanish</span> <em>Academy</em></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       ${links}
       <li><a href="contact.html" class="nav-cta ${activePage === 'contact.html' ? 'active' : ''}">Contact Us</a></li>
     </ul>
-  </nav>`;
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
+    <div class="mobile-menu-logo">GloryBer's<br/><span>Spanish Academy</span></div>
+    <ul class="mobile-nav-links">
+      ${pages.map(p => `<li><a href="${p.href}" class="${p.href === activePage ? 'active' : ''}">${p.label}</a></li>`).join('')}
+      <li><a href="contact.html" class="mobile-cta">📞 Contact Us</a></li>
+    </ul>
+    <div class="mobile-menu-contact">
+      <a href="tel:5713477360">(571) 347-7360</a>
+      <span>Mon–Fri: 7AM–5PM</span>
+    </div>
+  </div>
+  <div class="mobile-overlay" id="mobile-overlay"></div>`;
 }
 
 function getFooterHTML() {
@@ -65,7 +82,32 @@ function initShared(activePage) {
   document.body.insertAdjacentHTML('afterbegin', getNavHTML(activePage));
   document.body.insertAdjacentHTML('beforeend', getFooterHTML());
 
-  // Scroll reveal
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  const closeBtn = document.getElementById('mobile-menu-close');
+
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    mobileOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    hamburger.classList.add('open');
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.classList.remove('open');
+  }
+
+  hamburger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  mobileOverlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -76,4 +118,70 @@ function initShared(activePage) {
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
+}
+
+// =============================================
+// CUSTOM PAINTBRUSH CURSOR
+// =============================================
+function initCursor() {
+  // Don't run on touch devices
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
+  const cursor = document.createElement('div');
+  cursor.classList.add('custom-cursor');
+  cursor.textContent = '🎨';
+  document.body.appendChild(cursor);
+
+  let mouseX = -100, mouseY = -100;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+  });
+
+  // Tilt & scale on click, spawn paint splats
+  const splats = ['🔴','🟡','🟢','🔵','🟠','🟣','⭐','✨'];
+
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('clicking');
+
+    // Spawn 4–6 random splat particles
+    const count = 4 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < count; i++) {
+      const splat = document.createElement('div');
+      splat.classList.add('paint-splat');
+      splat.textContent = splats[Math.floor(Math.random() * splats.length)];
+      splat.style.left = mouseX + 'px';
+      splat.style.top  = mouseY + 'px';
+
+      const angle = (Math.random() * 360) * (Math.PI / 180);
+      const dist  = 30 + Math.random() * 50;
+      splat.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      splat.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+
+      document.body.appendChild(splat);
+      setTimeout(() => splat.remove(), 650);
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('clicking');
+  });
+
+  // Hide cursor when it leaves the window
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = '1';
+  });
+}
+
+// Run cursor after DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCursor);
+} else {
+  initCursor();
 }
