@@ -50,7 +50,7 @@ function getFooterHTML() {
         <div>
           <div class="footer-brand">GloryBer's <span>Spanish</span> Academy</div>
           <p class="footer-desc">A bilingual daycare in Alexandria, VA dedicated to nurturing the growth, development, and happiness of every child — in English and in Spanish.</p>
-          <div style="font-size:1.8rem;letter-spacing:6px;">🇺🇸 🌟 🇪🇸</div>
+
         </div>
         <div class="footer-col">
           <h4>Quick Links</h4>
