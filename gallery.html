@@ -6,277 +6,338 @@
   <title>Gallery | GloryBer's Spanish Academy</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
+
+    .gallery-section {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
     /* FILTER TABS */
     .filter-bar {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
       justify-content: center;
       margin-bottom: 48px;
     }
 
     .filter-btn {
-      padding: 10px 22px;
+      background: #F0F0F0;
+      border: none;
       border-radius: 50px;
-      border: 2px solid #E5E5E5;
-      background: white;
+      padding: 10px 22px;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 0.88rem;
-      color: #888;
+      color: #666;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .filter-btn.active, .filter-btn:hover {
-      border-color: var(--red);
-      background: var(--red);
-      color: white;
-    }
+    .filter-btn:hover { background: #E0F4FF; color: var(--blue); }
+    .filter-btn.active { background: var(--red); color: white; }
 
-    /* GALLERY GRID */
+    /* GRID */
     .gallery-grid {
       columns: 3;
-      column-gap: 20px;
+      column-gap: 16px;
     }
 
     .gallery-item {
       break-inside: avoid;
-      margin-bottom: 20px;
-      border-radius: 16px;
+      margin-bottom: 16px;
+      border-radius: 18px;
       overflow: hidden;
       position: relative;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .gallery-item:hover {
-      transform: scale(1.02);
+      transform: translateY(-4px);
       box-shadow: 0 16px 40px rgba(0,0,0,0.15);
     }
 
     .gallery-item img {
       width: 100%;
       display: block;
-      object-fit: cover;
+      border-radius: 18px;
     }
 
-    .gallery-item-overlay {
+    .gallery-item .caption {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: white;
+      padding: 20px 14px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 0 0 18px 18px;
       opacity: 0;
       transition: opacity 0.3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 16px;
     }
 
-    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item:hover .caption { opacity: 1; }
 
-    .gallery-item-label {
-      color: white;
-      font-weight: 800;
-      font-size: 0.9rem;
-    }
-
-    /* PLACEHOLDER TILES (until real photos are added) */
-    .gallery-placeholder-tile {
-      break-inside: avoid;
-      margin-bottom: 20px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-      border: 3px dashed #DDD;
-      display: flex;
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 8px;
-      padding: 40px 20px;
+      padding: 20px;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 16px;
+      object-fit: contain;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s;
+      z-index: 10000;
+    }
+
+    .lightbox-close:hover { transform: scale(1.1); }
+
+    .lightbox-prev, .lightbox-next {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: white;
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 10000;
+    }
+
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.3); }
+
+    /* HIDDEN items for filter */
+    .gallery-item.hidden { display: none; }
+
+    /* CTA */
+    .gallery-cta {
       text-align: center;
-    }
-
-    .gallery-placeholder-tile .ph-icon { font-size: 3rem; }
-    .gallery-placeholder-tile p {
-      font-size: 0.82rem;
-      color: #AAA;
-      font-weight: 600;
-    }
-
-    /* Real images from old site */
-    .real-photos-section {
-      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
-      padding: 80px 40px;
-    }
-
-    .real-photos-grid {
-      max-width: 1200px;
-      margin: 48px auto 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
-
-    .real-photo-card {
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-      background: white;
-      transition: transform 0.3s;
-    }
-    .real-photo-card:hover { transform: translateY(-6px); }
-
-    .real-photo-card img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .real-photo-caption {
-      padding: 20px 24px;
-    }
-    .real-photo-caption h3 {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.2rem;
-      color: var(--dark);
-      margin-bottom: 4px;
-    }
-    .real-photo-caption p {
-      font-size: 0.88rem;
-      color: #777;
-      font-weight: 600;
-    }
-
-    /* UPLOAD PROMPT */
-    .upload-prompt {
-      background: white;
-      border: 3px dashed var(--blue);
-      border-radius: 24px;
       padding: 60px 40px;
-      text-align: center;
-      margin-top: 60px;
-    }
-
-    .upload-prompt .up-icon { font-size: 4rem; margin-bottom: 16px; display: block; }
-
-    .upload-prompt h3 {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.8rem;
-      color: var(--dark);
-      margin-bottom: 10px;
-    }
-
-    .upload-prompt p {
-      color: #777;
-      font-weight: 600;
-      margin-bottom: 24px;
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
     }
 
     @media (max-width: 900px) {
       .gallery-grid { columns: 2; }
-      .real-photos-grid { grid-template-columns: 1fr; }
+      .gallery-section { padding: 60px 20px; }
     }
-    @media (max-width: 600px) {
-      .gallery-grid { columns: 1; }
-      .real-photos-section { padding: 60px 20px; }
+
+    @media (max-width: 500px) {
+      .gallery-grid { columns: 2; column-gap: 10px; }
+      .gallery-item { margin-bottom: 10px; }
+      .gallery-section { padding: 40px 16px; }
+      .lightbox-prev { left: 6px; }
+      .lightbox-next { right: 6px; }
     }
+
   </style>
 </head>
 <body>
 
   <div class="page-header">
     <div class="page-header-content">
-      <div class="section-tag tag-purple">Gallery · Galería</div>
+      <div class="section-tag tag-green">Gallery · Galería</div>
       <h1>Life at GloryBer's 📸</h1>
-      <p>Smiles, crafts, celebrations, and everything in between. A peek into the joy that fills our center every day.</p>
+      <p>A peek into the joy, learning, and laughter happening every day at our academy.</p>
     </div>
   </div>
 
-  <!-- REAL PHOTOS FROM OLD SITE -->
-  <div class="real-photos-section">
-    <div style="max-width:1200px;margin:0 auto;text-align:center;" class="reveal">
-      <div class="section-tag tag-red">Photos · Fotos</div>
-      <h2 class="section-title">Moments We Love to Capture ❤️</h2>
-    </div>
-    <div class="real-photos-grid">
-      <div class="real-photo-card reveal">
-        <img
-          src="https://gloryberacademy.com/assets/images/activities-2-816x663.jpg"
-          alt="Daily activities at GloryBer's Spanish Academy"
-          onerror="this.style.display='none'"
-        />
-        <div class="real-photo-caption">
-          <h3>Daily Activities 🎨</h3>
-          <p>Learning, playing, and growing — every single day.</p>
-        </div>
-      </div>
-      <div class="real-photo-card reveal">
-        <img
-          src="https://gloryberacademy.com/assets/images/valentines-popup-752x611.jpg"
-          alt="Valentine's Day celebration 2022"
-          onerror="this.style.display='none'"
-        />
-        <div class="real-photo-caption">
-          <h3>Valentine's Day 2022 💝</h3>
-          <p>Dancing, games, snacks, and gift exchanges with our little ones.</p>
-        </div>
-      </div>
-    </div>
+  <div class="gallery-section">
 
-    <!-- UPLOAD PROMPT -->
-    <div style="max-width:1200px;margin:0 auto;">
-      <div class="upload-prompt reveal">
-        <span class="up-icon">📷</span>
-        <h3>More Photos Coming Soon!</h3>
-        <p>We're building out this gallery — drop your photos and we'll add them right here. The more the merrier!</p>
-        <a href="contact.html" class="btn btn-blue">Get in Touch to Share Photos →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- PLACEHOLDER GALLERY (remove tiles as real photos are added) -->
-  <div class="section-wrap">
-    <div class="reveal" style="text-align:center;margin-bottom:40px;">
-      <div class="section-tag tag-green">Add Your Photos Here</div>
-      <h2 class="section-title">Gallery Sections 🖼️</h2>
-      <p class="section-desc" style="margin:0 auto;">These categories are ready to fill in. Replace placeholder tiles with real photos using the <code>img</code> tag pointing to your <code>images/</code> folder.</p>
-    </div>
-
-    <!-- Filter buttons — wire up with JS once photos are added -->
+    <!-- FILTER BAR -->
     <div class="filter-bar">
-      <button class="filter-btn active">All Photos</button>
-      <button class="filter-btn">🎨 Arts & Crafts</button>
-      <button class="filter-btn">🏃 Playground</button>
-      <button class="filter-btn">🎉 Celebrations</button>
-      <button class="filter-btn">📚 Learning</button>
-      <button class="filter-btn">🍎 Mealtime</button>
+      <button class="filter-btn active" onclick="filterGallery('all', this)">🌟 All Photos</button>
+      <button class="filter-btn" onclick="filterGallery('art', this)">🎨 Art & Learning</button>
+      <button class="filter-btn" onclick="filterGallery('play', this)">🏃 Play & Activities</button>
+      <button class="filter-btn" onclick="filterGallery('celebrations', this)">🎉 Celebrations</button>
+      <button class="filter-btn" onclick="filterGallery('babies', this)">🍼 Little Ones</button>
     </div>
 
-    <div class="gallery-grid">
-      <!-- TO ADD REAL PHOTOS: replace a placeholder div below with:
-        <div class="gallery-item">
-          <img src="images/your-photo.jpg" alt="Description" />
-          <div class="gallery-item-overlay">
-            <div class="gallery-item-label">Photo Caption</div>
-          </div>
-        </div>
-      -->
-      <div class="gallery-placeholder-tile" style="height:220px;"><span class="ph-icon">🎨</span><p>Arts & Crafts Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:300px;"><span class="ph-icon">🏃</span><p>Playground Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:200px;"><span class="ph-icon">📚</span><p>Story Time Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:260px;"><span class="ph-icon">🎉</span><p>Celebration Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:200px;"><span class="ph-icon">🍎</span><p>Mealtime Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:280px;"><span class="ph-icon">🎵</span><p>Music & Dance Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:220px;"><span class="ph-icon">🌱</span><p>Nature Activity Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:240px;"><span class="ph-icon">🧩</span><p>Playtime Photo</p></div>
-      <div class="gallery-placeholder-tile" style="height:200px;"><span class="ph-icon">💝</span><p>Holiday Photo</p></div>
+    <!-- GALLERY GRID -->
+    <div class="gallery-grid" id="gallery-grid">
+
+      <div class="gallery-item reveal" data-cat="play" onclick="openLightbox(0)">
+        <img src="images/gallery-1.png" alt="Teacher and student at GloryBer's" loading="lazy" />
+        <div class="caption">💛 Teacher time</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="art" onclick="openLightbox(1)">
+        <img src="images/gallery-2.png" alt="Painting activity at GloryBer's" loading="lazy" />
+        <div class="caption">🎨 Painting time!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="celebrations" onclick="openLightbox(2)">
+        <img src="images/gallery-3.png" alt="Easter celebration at GloryBer's" loading="lazy" />
+        <div class="caption">🐰 Easter fun!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="art" onclick="openLightbox(3)">
+        <img src="images/gallery-4.png" alt="Art class with aprons at GloryBer's" loading="lazy" />
+        <div class="caption">🎨 Little artists at work</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="celebrations" onclick="openLightbox(4)">
+        <img src="images/gallery-5.png" alt="Mickey Mouse visit at GloryBer's" loading="lazy" />
+        <div class="caption">🐭 Special visitor!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="play" onclick="openLightbox(5)">
+        <img src="images/gallery-6.png" alt="Snack time at GloryBer's" loading="lazy" />
+        <div class="caption">🍎 Healthy snack time</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="art" onclick="openLightbox(6)">
+        <img src="images/gallery-7.png" alt="Father's Day craft at GloryBer's" loading="lazy" />
+        <div class="caption">👨 Feliz Día del Padre!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="celebrations" onclick="openLightbox(7)">
+        <img src="images/gallery-8.png" alt="Christmas celebration at GloryBer's" loading="lazy" />
+        <div class="caption">🎄 Christmas cheer!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="play" onclick="openLightbox(8)">
+        <img src="images/gallery-9.png" alt="Outdoor picnic at GloryBer's" loading="lazy" />
+        <div class="caption">🌿 Outdoor picnic day</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="celebrations" onclick="openLightbox(9)">
+        <img src="images/gallery-10.png" alt="Easter at GloryBer's" loading="lazy" />
+        <div class="caption">🐰 Easter bunny ears!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="babies" onclick="openLightbox(10)">
+        <img src="images/gallery-11.png" alt="Baby at GloryBer's" loading="lazy" />
+        <div class="caption">🌟 Star eyes!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="babies" onclick="openLightbox(11)">
+        <img src="images/gallery-12.png" alt="Baby in jumper at GloryBer's" loading="lazy" />
+        <div class="caption">🎀 Jumper joy!</div>
+      </div>
+
+      <div class="gallery-item reveal" data-cat="celebrations" onclick="openLightbox(12)">
+        <img src="images/gallery-13.png" alt="Birthday celebration at GloryBer's" loading="lazy" />
+        <div class="caption">🎂 Happy Birthday!</div>
+      </div>
+
     </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changeLightbox(-1)">‹</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+    <button class="lightbox-next" onclick="changeLightbox(1)">›</button>
+  </div>
+
+  <!-- CTA -->
+  <div class="gallery-cta">
+    <div class="section-tag tag-red">Come See Us!</div>
+    <h2 class="section-title">Want to Be Part of the Fun? 🎉</h2>
+    <p class="section-desc" style="margin:0 auto 32px;">Schedule a visit and see the joy of GloryBer's in person.</p>
+    <a href="contact.html" class="btn btn-primary">Schedule a Visit →</a>
   </div>
 
   <script src="shared.js"></script>
-  <script>initShared('gallery.html');</script>
+  <script>
+    initShared('gallery.html');
+
+    // All images in order for lightbox
+    const images = [
+      { src: 'images/gallery-1.png',  alt: 'Teacher and student at GloryBer\'s' },
+      { src: 'images/gallery-2.png',  alt: 'Painting activity' },
+      { src: 'images/gallery-3.png',  alt: 'Easter celebration' },
+      { src: 'images/gallery-4.png',  alt: 'Art class with aprons' },
+      { src: 'images/gallery-5.png',  alt: 'Mickey Mouse visit' },
+      { src: 'images/gallery-6.png',  alt: 'Snack time' },
+      { src: 'images/gallery-7.png',  alt: 'Father\'s Day craft' },
+      { src: 'images/gallery-8.png',  alt: 'Christmas celebration' },
+      { src: 'images/gallery-9.png',  alt: 'Outdoor picnic' },
+      { src: 'images/gallery-10.png', alt: 'Easter bunny ears' },
+      { src: 'images/gallery-11.png', alt: 'Baby with star eyes' },
+      { src: 'images/gallery-12.png', alt: 'Baby in jumper' },
+      { src: 'images/gallery-13.png', alt: 'Birthday celebration' },
+    ];
+
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById('lightbox-img').src = images[index].src;
+      document.getElementById('lightbox-img').alt = images[index].alt;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnBg(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    function changeLightbox(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[currentIndex].src;
+      document.getElementById('lightbox-img').alt = images[currentIndex].alt;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') changeLightbox(1);
+      if (e.key === 'ArrowLeft')  changeLightbox(-1);
+      if (e.key === 'Escape')     closeLightbox();
+    });
+
+    // Filter
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
