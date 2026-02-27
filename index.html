@@ -404,6 +404,7 @@
     <div class="stat"><div class="stat-num y">Est. 2021</div><div class="stat-label">Founded</div></div>
     <div class="stat"><div class="stat-num g">Bilingual</div><div class="stat-label">English & Spanish</div></div>
     <div class="stat"><div class="stat-num b">Ages 0–5</div><div class="stat-label">Infants to Pre-K</div></div>
+    <div class="stat"><div class="stat-num r" id="grad-count">0</div><div class="stat-label">🎓 Graduates</div></div>
     <div class="stat"><div class="stat-num r">Mon–Fri</div><div class="stat-label">7AM – 5PM</div></div>
     <div class="stat"><div class="stat-num y">Flexible</div><div class="stat-label">1 Day or Full-Time</div></div>
   </div>
@@ -530,6 +531,34 @@
   </div>
 
   <script src="shared.js"></script>
-  <script>initShared('index.html');</script>
+  <script>
+    initShared('index.html');
+
+    // Count-up animation for graduates
+    function countUp(el, target, duration) {
+      let start = 0;
+      const step = Math.ceil(duration / target);
+      const timer = setInterval(() => {
+        start++;
+        el.textContent = start;
+        if (start >= target) {
+          el.textContent = target + '+';
+          clearInterval(timer);
+        }
+      }, step);
+    }
+
+    // Trigger when stats strip scrolls into view
+    const gradEl = document.getElementById('grad-count');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp(gradEl, 8, 1200);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(gradEl);
+  </script>
 </body>
 </html>
