@@ -67,7 +67,7 @@ function getFooterHTML() {
           <h4>Contact Us</h4>
           <ul>
             <li><a href="tel:5713477360">(571) 347-7360</a></li>
-            <li><a href="mailto:info@gloryberacademy.com">info@gloryberacademy.com</a></li>
+            <li><a href="mailto:gloryberacademy@gmail.com">gloryberacademy@gmail.com</a></li>
             <li><a href="contact.html">Alexandria, VA</a></li>
             <li><a href="#">Mon–Fri: 7:30AM–5PM</a></li>
           </ul>
