@@ -67,7 +67,7 @@ function getFooterHTML() {
           <h4>Contact Us</h4>
           <ul>
             <li><a href="tel:5713477360">(571) 347-7360</a></li>
-            <li><a href="mailto:gloryberacademy@gmail.com">gloryberacademy@gmail.com</a></li>
+            <li><a href="mailto:info@gloryberacademy.com">info@gloryberacademy.com</a></li>
             <li><a href="contact.html">Alexandria, VA</a></li>
             <li><a href="#">Mon–Fri: 7:30AM–5PM</a></li>
           </ul>
@@ -186,4 +186,146 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initCursor);
 } else {
   initCursor();
+}
+
+// =============================================
+// SMOOTH SCROLL
+// =============================================
+document.querySelectorAll('a[href]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+});
+
+// =============================================
+// CONFETTI BURST ON PAGE LOAD
+// =============================================
+function launchConfetti() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const colors = ['#FF6B6B','#FFD166','#06D6A0','#118AB2','#FF9F1C','#A855F7','#F472B6','#34D399'];
+  const shapes = ['circle', 'square', 'ribbon'];
+  const total = 80;
+
+  for (let i = 0; i < total; i++) {
+    const el = document.createElement('div');
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const size = 6 + Math.random() * 10;
+    const startX = Math.random() * window.innerWidth;
+    const delay = Math.random() * 800;
+    const duration = 1500 + Math.random() * 1000;
+    const drift = (Math.random() - 0.5) * 200;
+
+    el.style.cssText = `
+      position: fixed;
+      top: -20px;
+      left: ${startX}px;
+      width: ${size}px;
+      height: ${shape === 'ribbon' ? size * 3 : size}px;
+      background: ${color};
+      border-radius: ${shape === 'circle' ? '50%' : shape === 'ribbon' ? '2px' : '2px'};
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 1;
+      transform: rotate(${Math.random() * 360}deg);
+      animation: confettiFall ${duration}ms ${delay}ms ease-in forwards;
+      --drift: ${drift}px;
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), duration + delay + 100);
+  }
+}
+
+// Inject confetti keyframes
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(100vh) translateX(var(--drift)) rotate(720deg); opacity: 0; }
+  }
+`;
+document.head.appendChild(confettiStyle);
+
+// Fire confetti on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', launchConfetti);
+} else {
+  launchConfetti();
+}
+
+// =============================================
+// WAVE DIVIDERS — inject into section breaks
+// =============================================
+function injectWaves() {
+  const waveStyle = document.createElement('style');
+  waveStyle.textContent = `
+    .wave-divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin: 0;
+      padding: 0;
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+    .wave-top    { margin-bottom: -2px; }
+    .wave-bottom { margin-top: -2px; }
+  `;
+  document.head.appendChild(waveStyle);
+
+  // Insert a wave before the footer
+  const footer = document.querySelector('footer');
+  if (footer) {
+    const footerBg = getComputedStyle(footer).backgroundColor || '#1A1A2E';
+    const waveBefore = document.createElement('div');
+    waveBefore.className = 'wave-divider wave-top';
+    waveBefore.innerHTML = `
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#1A1A2E"/>
+      </svg>`;
+    footer.parentNode.insertBefore(waveBefore, footer);
+  }
+
+  // Insert a wave after the stats strip
+  const stats = document.querySelector('.stats-strip');
+  if (stats) {
+    const waveAfter = document.createElement('div');
+    waveAfter.className = 'wave-divider wave-bottom';
+    waveAfter.style.background = 'white';
+    waveAfter.innerHTML = `
+      <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,25 C360,50 720,0 1080,25 C1260,37 1380,20 1440,25 L1440,50 L0,50 Z" fill="white"/>
+      </svg>`;
+    stats.insertAdjacentElement('afterend', waveAfter);
+  }
+
+  // Insert wave before CTA banner
+  const cta = document.querySelector('.cta-banner');
+  if (cta) {
+    const waveCta = document.createElement('div');
+    waveCta.className = 'wave-divider wave-top';
+    waveCta.innerHTML = `
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C240,0 480,60 720,30 C960,0 1200,60 1440,30 L1440,60 L0,60 Z" fill="#FF6B6B"/>
+      </svg>`;
+    cta.parentNode.insertBefore(waveCta, cta);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', injectWaves);
+} else {
+  injectWaves();
 }
