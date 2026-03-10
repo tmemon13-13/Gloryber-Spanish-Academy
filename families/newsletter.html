@@ -17,9 +17,15 @@
       min-height: 100vh;
     }
 
+    /* MONTH COLORS */
+    :root {
+      --theme: #2D8A4E; /* default: green */
+      --theme-light: #E8F7EE;
+    }
+
     /* HEADER */
     .header {
-      background: linear-gradient(135deg, #2D8A4E, #1a6035);
+      background: linear-gradient(135deg, var(--theme), color-mix(in srgb, var(--theme) 70%, black));
       padding: 32px 24px 24px;
       text-align: center;
     }
@@ -67,7 +73,7 @@
       margin-bottom: 12px;
     }
 
-    .welcome h1 span { color: #2D8A4E; }
+    .welcome h1 span { color: var(--theme); }
 
     .welcome p {
       color: #555;
@@ -136,16 +142,16 @@
       text-align: center;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       font-weight: 700;
-      color: #2D8A4E;
+      color: var(--theme);
       font-size: 0.95rem;
-      border: 2px solid #E8F7EE;
+      border: 2px solid var(--theme-light);
       min-width: 140px;
     }
 
     .archive-card.active {
-      background: #2D8A4E;
+      background: var(--theme);
       color: white;
-      border-color: #2D8A4E;
+      border-color: var(--theme);
     }
 
     .archive-card span {
@@ -164,7 +170,7 @@
     }
 
     .footer a {
-      color: #06D6A0;
+      color: var(--theme);
       text-decoration: none;
       font-weight: 700;
     }
@@ -184,6 +190,26 @@
       display: block;
     }
   </style>
+  <script>
+    // Auto-set theme color based on current month
+    const monthThemes = {
+      0:  { color: '#5DADE2', light: '#EAF4FB', label: '⛄ January'   },
+      1:  { color: '#E91E8C', light: '#FCE4F3', label: '💝 February'  },
+      2:  { color: '#2D8A4E', light: '#E8F7EE', label: '🍀 March'     },
+      3:  { color: '#9B59B6', light: '#F5EEF8', label: '🌸 April'     },
+      4:  { color: '#F0A500', light: '#FEF9E7', label: '☀️ May'       },
+      5:  { color: '#118AB2', light: '#EAF4FB', label: '🌊 June'      },
+      6:  { color: '#E63946', light: '#FDEDEE', label: '🎆 July'      },
+      7:  { color: '#FF6B35', light: '#FFF0EB', label: '🍎 August'    },
+      8:  { color: '#D4541A', light: '#FBF0EB', label: '🍂 September' },
+      9:  { color: '#E67E22', light: '#FEF5E7', label: '🎃 October'   },
+      10: { color: '#8B5E3C', light: '#F5EFE8', label: '🦃 November'  },
+      11: { color: '#C0392B', light: '#FDEDEC', label: '❄️ December'  },
+    };
+    const theme = monthThemes[new Date().getMonth()];
+    document.documentElement.style.setProperty('--theme', theme.color);
+    document.documentElement.style.setProperty('--theme-light', theme.light);
+  </script>
 </head>
 <body>
 
@@ -205,7 +231,7 @@
 
     <!-- CURRENT NEWSLETTER LABEL -->
     <div style="text-align:center; margin-bottom: 20px;">
-      <span style="background:#2D8A4E; color:white; border-radius:50px; padding:6px 20px; font-weight:800; font-size:0.9rem;">📬 March 2025 Newsletter</span>
+      <span style="background:var(--theme); color:white; border-radius:50px; padding:6px 20px; font-weight:800; font-size:0.9rem;">📬 March 2025 Newsletter</span>
     </div>
 
     <!-- CANVA EMBED -->
