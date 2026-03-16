@@ -239,78 +239,75 @@
       margin-top: 48px;
     }
 
-    /* Flip card wrapper */
-    .program-card {
-      border-radius: 22px;
-      min-height: 220px;
+    .program-card-wrap {
       perspective: 1000px;
+      height: 260px;
       cursor: pointer;
     }
-
-    .card-inner {
+    .program-card {
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 220px;
       transform-style: preserve-3d;
-      transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 22px;
     }
-
-    .program-card:hover .card-inner,
-    .program-card.flipped .card-inner {
+    .program-card-wrap:hover .program-card,
+    .program-card-wrap.flipped .program-card {
       transform: rotateY(180deg);
     }
-
-    .card-front,
-    .card-back {
+    .program-card-front {
       position: absolute;
       inset: 0;
       border-radius: 22px;
       padding: 32px 24px;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-    }
-
-    .card-back {
-      transform: rotateY(180deg);
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      gap: 10px;
     }
-
-    /* Color themes applied to both faces */
-    .program-card.red    .card-front,
-    .program-card.red    .card-back   { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
-    .program-card.blue   .card-front,
-    .program-card.blue   .card-back   { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
-    .program-card.green  .card-front,
-    .program-card.green  .card-back   { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
-    .program-card.yellow .card-front,
-    .program-card.yellow .card-back   { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
-    .program-card.orange .card-front,
-    .program-card.orange .card-back   { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
-    .program-card.purple .card-front,
-    .program-card.purple .card-back   { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
-
+    .program-card-wrap.red    .program-card-front { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
+    .program-card-wrap.blue   .program-card-front { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
+    .program-card-wrap.green  .program-card-front { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
+    .program-card-wrap.yellow .program-card-front { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
+    .program-card-wrap.orange .program-card-front { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
+    .program-card-wrap.purple .program-card-front { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
+    .program-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: rotateY(180deg);
+      overflow: hidden;
+    }
+    .program-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 22px;
+    }
+    .program-card-back .back-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.05rem;
+      padding: 20px 16px 12px;
+      border-radius: 0 0 22px 22px;
+      text-align: center;
+    }
     .program-emoji { font-size: 2.8rem; margin-bottom: 14px; display: block; }
-    .card-front h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--dark); margin-bottom: 8px; }
-    .card-front p  { font-size: 0.9rem; color: #444; line-height: 1.6; font-weight: 600; }
-
-    .card-back .back-emoji  { font-size: 2.2rem; }
-    .card-back .back-title  { font-family: 'Fredoka One', cursive; font-size: 1.15rem; color: var(--dark); }
-    .card-back .back-text   { font-size: 0.88rem; color: #444; line-height: 1.6; font-weight: 600; }
-    .card-back .flip-hint   { font-size: 0.72rem; color: rgba(0,0,0,0.35); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-
-    .flip-hint-front {
-      font-size: 0.72rem;
-      color: rgba(0,0,0,0.35);
+    .program-card-front h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--dark); margin-bottom: 8px; }
+    .program-card-front p { font-size: 0.9rem; color: #444; line-height: 1.6; font-weight: 600; }
+    .flip-hint {
+      text-align: center;
+      font-size: 0.82rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: #999;
+      margin-bottom: -32px;
       margin-top: 12px;
     }
 
@@ -328,35 +325,18 @@
       gap: 22px;
     }
 
-    /* Activity flip cards */
     .activity-card {
-      border-radius: 20px;
-      min-height: 190px;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .activity-card .card-inner {
-      min-height: 190px;
-      border-radius: 20px;
-    }
-
-    .activity-card .card-front {
       background: white;
+      border-radius: 20px;
+      padding: 28px 22px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.07);
       text-align: center;
-      border-radius: 20px;
+      transition: transform 0.3s;
     }
-
-    .activity-card .card-back {
-      background: linear-gradient(135deg, #E8F8FF, #CAFFEF);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
-      border-radius: 20px;
-    }
-
+    .activity-card:hover { transform: translateY(-5px); }
     .activity-card .icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
-    .activity-card .card-front h3 { font-family: 'Fredoka One', cursive; font-size: 1.15rem; color: var(--dark); margin-bottom: 6px; }
-    .activity-card .card-front p { font-size: 0.87rem; color: #666; line-height: 1.6; font-weight: 600; }
+    .activity-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.15rem; color: var(--dark); margin-bottom: 6px; }
+    .activity-card p { font-size: 0.87rem; color: #666; line-height: 1.6; font-weight: 600; }
 
     /* ===== TESTIMONIALS ===== */
     .testimonials-section {
@@ -481,6 +461,7 @@
     @media (max-width: 900px) {
       .about-inner { grid-template-columns: 1fr; gap: 40px; }
       .programs-grid { grid-template-columns: 1fr 1fr; }
+      .program-card-wrap { height: 240px; }
       .activities-grid { grid-template-columns: 1fr 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .contact-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -489,6 +470,7 @@
 
     @media (max-width: 600px) {
       .programs-grid { grid-template-columns: 1fr; }
+      .program-card-wrap { height: 220px; }
       .activities-grid { grid-template-columns: 1fr; }
       .about-wrap, .activities-bg { padding: 60px 20px; }
       .page-section { padding: 60px 20px; }
@@ -585,103 +567,93 @@
       <h2 class="section-title">Lo Que Ofrecemos 🌈</h2>
       <p class="section-desc" style="margin:0 auto;">Cada programa está diseñado para despertar la curiosidad, desarrollar habilidades bilingües y mantener a los niños felices.</p>
     </div>
+    <p class="flip-hint">✨ Pasa el cursor para ver fotos · Hover to see photos!</p>
     <div class="programs-grid">
-      <div class="program-card red reveal">
-        <div class="card-inner">
-          <div class="card-front">
+
+      <div class="program-card-wrap red reveal">
+        <div class="program-card">
+          <div class="program-card-front">
             <span class="program-emoji">🍼</span>
             <h3>Cuidado de Bebés</h3>
             <p>Atención cálida y cuidadosa para nuestros aprendices más pequeños, con cunas monitoreadas y rutinas adaptadas a cada bebé.</p>
-            <div class="flip-hint-front">✦ Toque para más ✦</div>
           </div>
-          <div class="card-back">
-            <div class="back-emoji">💛</div>
-            <div class="back-title">Edades: 0 – 12 meses</div>
-            <div class="back-text">Rutinas de sueño personalizadas, música suave en inglés y español, y brazos siempre listos para abrazar.</div>
-            <div class="flip-hint">✦ Toque para volver ✦</div>
+          <div class="program-card-back">
+            <img src="images/gallery-11.png" alt="Bebé en GloryBer's" />
+            <div class="back-label">🍼 Cuidado de Bebés</div>
           </div>
         </div>
       </div>
-      <div class="program-card blue reveal">
-        <div class="card-inner">
-          <div class="card-front">
+
+      <div class="program-card-wrap blue reveal">
+        <div class="program-card">
+          <div class="program-card-front">
             <span class="program-emoji">🧸</span>
             <h3>Programa para Niños Pequeños</h3>
             <p>Aprendizaje a través del juego, canciones e historias en inglés y español, desarrollando vocabulario y habilidades motoras.</p>
-            <div class="flip-hint-front">✦ Toque para más ✦</div>
           </div>
-          <div class="card-back">
-            <div class="back-emoji">🎵</div>
-            <div class="back-title">Edades: 1 – 3 años</div>
-            <div class="back-text">Canciones bilingües, juegos sensoriales y actividades motrices diseñadas para cada etapa del desarrollo.</div>
-            <div class="flip-hint">✦ Toque para volver ✦</div>
+          <div class="program-card-back">
+            <img src="images/gallery-4.png" alt="Niños en actividad de arte" />
+            <div class="back-label">🧸 Aprendiendo Juntos</div>
           </div>
         </div>
       </div>
-      <div class="program-card green reveal">
-        <div class="card-inner">
-          <div class="card-front">
+
+      <div class="program-card-wrap green reveal">
+        <div class="program-card">
+          <div class="program-card-front">
             <span class="program-emoji">🎓</span>
             <h3>Preparación Pre-Kinder</h3>
             <p>Preparamos a los niños para el jardín de infantes con actividades de lectoescritura, matemáticas y desarrollo bilingüe.</p>
-            <div class="flip-hint-front">✦ Toque para más ✦</div>
           </div>
-          <div class="card-back">
-            <div class="back-emoji">📖</div>
-            <div class="back-title">Edades: 3 – 5 años</div>
-            <div class="back-text">Letras, números, colores y formas — todo enseñado en inglés y español para una transición exitosa al kinder.</div>
-            <div class="flip-hint">✦ Toque para volver ✦</div>
+          <div class="program-card-back">
+            <img src="images/gallery-7.png" alt="Niño con manualidad" />
+            <div class="back-label">🎓 Listos para el Futuro</div>
           </div>
         </div>
       </div>
-      <div class="program-card yellow reveal">
-        <div class="card-inner">
-          <div class="card-front">
+
+      <div class="program-card-wrap yellow reveal">
+        <div class="program-card">
+          <div class="program-card-front">
             <span class="program-emoji">🗣️</span>
             <h3>Inmersión en Español</h3>
             <p>Nuestro currículo bilingüe integra el español de forma natural en cada parte del día — canciones, instrucciones, cuentos y juegos.</p>
-            <div class="flip-hint-front">✦ Toque para más ✦</div>
           </div>
-          <div class="card-back">
-            <div class="back-emoji">🌎</div>
-            <div class="back-title">Todo el Día, Cada Día</div>
-            <div class="back-text">El español no es solo una clase — es el idioma de nuestra casa. Los niños lo absorben de manera natural y con alegría.</div>
-            <div class="flip-hint">✦ Toque para volver ✦</div>
+          <div class="program-card-back">
+            <img src="images/gallery-5.png" alt="Visita especial en GloryBer's" />
+            <div class="back-label">🗣️ ¡Español Todos los Días!</div>
           </div>
         </div>
       </div>
-      <div class="program-card orange reveal">
-        <div class="card-inner">
-          <div class="card-front">
+
+      <div class="program-card-wrap orange reveal">
+        <div class="program-card">
+          <div class="program-card-front">
             <span class="program-emoji">🍎</span>
             <h3>Comidas Saludables</h3>
             <p>Ofrecemos comidas y meriendas nutritivas y caseras durante todo el día para alimentar el aprendizaje y el crecimiento.</p>
-            <div class="flip-hint-front">✦ Toque para más ✦</div>
           </div>
-          <div class="card-back">
-            <div class="back-emoji">🥗</div>
-            <div class="back-title">Hecho con Amor</div>
-            <div class="back-text">Desayuno, almuerzo y merienda incluidos — preparados en casa con ingredientes frescos y nutritivos todos los días.</div>
-            <div class="flip-hint">✦ Toque para volver ✦</div>
+          <div class="program-card-back">
+            <img src="images/gallery-6.png" alt="Hora de la merienda" />
+            <div class="back-label">🍎 ¡Rico y Nutritivo!</div>
           </div>
         </div>
       </div>
-      <div class="program-card purple reveal">
-        <div class="card-inner">
-          <div class="card-front">
+
+      <div class="program-card-wrap purple reveal">
+        <div class="program-card">
+          <div class="program-card-front">
             <span class="program-emoji">📅</span>
             <h3>Inscripción Flexible</h3>
             <p>¿Necesita cuidado solo un día a la semana o todos los días? Nos adaptamos a todos los horarios. Nadie es rechazado.</p>
-            <div class="flip-hint-front">✦ Toque para más ✦</div>
           </div>
-          <div class="card-back">
-            <div class="back-emoji">🗓️</div>
-            <div class="back-title">A Su Medida</div>
-            <div class="back-text">Tiempo completo, medio tiempo o días individuales — creamos un horario que funcione para su familia. ¡Llámenos!</div>
-            <div class="flip-hint">✦ Toque para volver ✦</div>
+          <div class="program-card-back">
+            <img src="images/kids-stroller.png" alt="Niños disfrutando al aire libre" />
+            <div class="back-label">📅 ¡Nos Adaptamos a Ti!</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -695,100 +667,34 @@
       </div>
       <div class="activities-grid">
         <div class="activity-card reveal">
-          <div class="card-inner">
-            <div class="card-front">
-              <span class="icon">🎨</span>
-              <h3>Proyectos de Arte</h3>
-              <p>Exploración creativa y de motricidad fina a través de pintura, dibujo y manualidades.</p>
-              <div class="flip-hint-front">✦ Toque para más ✦</div>
-            </div>
-            <div class="card-back">
-              <div class="back-emoji">✏️</div>
-              <div class="back-title">Creatividad sin Límites</div>
-              <div class="back-text">Pinturas, plastilina, collages y más — cada proyecto desarrolla la motricidad fina y la expresión personal.</div>
-              <div class="flip-hint">✦ Toque para volver ✦</div>
-            </div>
-          </div>
+          <span class="icon">🎨</span>
+          <h3>Proyectos de Arte</h3>
+          <p>Exploración creativa y de motricidad fina a través de pintura, dibujo y manualidades.</p>
         </div>
         <div class="activity-card reveal">
-          <div class="card-inner">
-            <div class="card-front">
-              <span class="icon">📚</span>
-              <h3>Hora del Cuento</h3>
-              <p>Narración bilingüe con títeres y accesorios de colores para el desarrollo del lenguaje.</p>
-              <div class="flip-hint-front">✦ Toque para más ✦</div>
-            </div>
-            <div class="card-back">
-              <div class="back-emoji">🎭</div>
-              <div class="back-title">Palabras que Cobran Vida</div>
-              <div class="back-text">Cuentos en inglés y español con títeres animados que hacen que cada historia sea una aventura inolvidable.</div>
-              <div class="flip-hint">✦ Toque para volver ✦</div>
-            </div>
-          </div>
+          <span class="icon">📚</span>
+          <h3>Hora del Cuento</h3>
+          <p>Narración bilingüe con títeres y accesorios de colores para el desarrollo del lenguaje.</p>
         </div>
         <div class="activity-card reveal">
-          <div class="card-inner">
-            <div class="card-front">
-              <span class="icon">🏃</span>
-              <h3>Juego al Aire Libre</h3>
-              <p>Actividad física diaria al aire libre o en interiores, llueva o haga sol.</p>
-              <div class="flip-hint-front">✦ Toque para más ✦</div>
-            </div>
-            <div class="card-back">
-              <div class="back-emoji">🌤️</div>
-              <div class="back-title">¡A Moverse!</div>
-              <div class="back-text">Correr, saltar, explorar — el movimiento diario es esencial para el desarrollo físico y emocional sano.</div>
-              <div class="flip-hint">✦ Toque para volver ✦</div>
-            </div>
-          </div>
+          <span class="icon">🏃</span>
+          <h3>Juego al Aire Libre</h3>
+          <p>Actividad física diaria al aire libre o en interiores, llueva o haga sol.</p>
         </div>
         <div class="activity-card reveal">
-          <div class="card-inner">
-            <div class="card-front">
-              <span class="icon">🎵</span>
-              <h3>Música y Canto</h3>
-              <p>Canciones, bailes y rimas en inglés y español todos los días.</p>
-              <div class="flip-hint-front">✦ Toque para más ✦</div>
-            </div>
-            <div class="card-back">
-              <div class="back-emoji">🎶</div>
-              <div class="back-title">Ritmo y Alegría</div>
-              <div class="back-text">La música refuerza el idioma, la memoria y la coordinación — ¡y hace que aprender sea mucho más divertido!</div>
-              <div class="flip-hint">✦ Toque para volver ✦</div>
-            </div>
-          </div>
+          <span class="icon">🎵</span>
+          <h3>Música y Canto</h3>
+          <p>Canciones, bailes y rimas en inglés y español todos los días.</p>
         </div>
         <div class="activity-card reveal">
-          <div class="card-inner">
-            <div class="card-front">
-              <span class="icon">🧩</span>
-              <h3>Juguetes Educativos</h3>
-              <p>Juguetes seleccionados diariamente según la etapa de desarrollo de cada niño.</p>
-              <div class="flip-hint-front">✦ Toque para más ✦</div>
-            </div>
-            <div class="card-back">
-              <div class="back-emoji">🌟</div>
-              <div class="back-title">Jugar es Aprender</div>
-              <div class="back-text">Rompecabezas, bloques, juegos de roles — cada juguete tiene un propósito pensado para el desarrollo integral.</div>
-              <div class="flip-hint">✦ Toque para volver ✦</div>
-            </div>
-          </div>
+          <span class="icon">🧩</span>
+          <h3>Juguetes Educativos</h3>
+          <p>Juguetes seleccionados diariamente según la etapa de desarrollo de cada niño.</p>
         </div>
         <div class="activity-card reveal">
-          <div class="card-inner">
-            <div class="card-front">
-              <span class="icon">🌱</span>
-              <h3>Naturaleza y Ciencias</h3>
-              <p>Exploraciones sencillas que enseñan curiosidad sobre el mundo que nos rodea.</p>
-              <div class="flip-hint-front">✦ Toque para más ✦</div>
-            </div>
-            <div class="card-back">
-              <div class="back-emoji">🔍</div>
-              <div class="back-title">Pequeños Científicos</div>
-              <div class="back-text">Plantas, insectos, el clima y más — cultivamos la curiosidad natural de cada niño con asombro y preguntas.</div>
-              <div class="flip-hint">✦ Toque para volver ✦</div>
-            </div>
-          </div>
+          <span class="icon">🌱</span>
+          <h3>Naturaleza y Ciencias</h3>
+          <p>Exploraciones sencillas que enseñan curiosidad sobre el mundo que nos rodea.</p>
         </div>
       </div>
     </div>
@@ -852,7 +758,7 @@
             <div class="contact-item-icon ci-green">✉️</div>
             <div class="contact-item-text">
               <strong>Correo Electrónico</strong>
-              <a href="/cdn-cgi/l/email-protection#51363d3e232833342330323035343c2811363c30383d7f323e3c"><span class="__cf_email__" data-cfemail="2542494a575c4740574446444140485c654248444c490b464a48">[email&#160;protected]</span></a>
+              <a href="/cdn-cgi/l/email-protection#d3b4bfbca1aab1b6a1b2b0b2b7b6beaa93b4beb2babffdb0bcbe"><span class="__cf_email__" data-cfemail="adcac1c2dfd4cfc8dfccceccc9c8c0d4edcac0ccc4c183cec2c0">[email&#160;protected]</span></a>
             </div>
           </div>
           <div class="contact-item">
@@ -937,13 +843,6 @@
   <script>
     initShared('espanol.html');
 
-    // Flip cards — toggle on click (for touch/mobile); hover handles desktop via CSS
-    document.querySelectorAll('.program-card, .activity-card').forEach(card => {
-      card.addEventListener('click', () => {
-        card.classList.toggle('flipped');
-      });
-    });
-
     // Contact form
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
@@ -964,4 +863,19 @@
           });
           if (response.ok) {
             form.style.display = 'none';
-            successMsg.style.display = 'block';
+            successMsg.style.display = 'block';          } else { throw new Error(); }
+        } catch {
+          errorMsg.style.display = 'block';
+          submitBtn.textContent = '¡Enviar Mensaje! 🚀';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  
+    // Mobile tap-to-flip
+    document.querySelectorAll('.program-card-wrap').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+  </script>
+</body>
+</html>
