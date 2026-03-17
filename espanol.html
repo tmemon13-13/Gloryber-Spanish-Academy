@@ -363,6 +363,53 @@
 
     .stars { color: var(--yellow); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 14px; }
     .testimonial-card p { color: rgba(255,255,255,0.85); line-height: 1.7; font-weight: 600; margin-bottom: 18px; font-style: italic; }
+
+    .testimonial-card.featured {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(255,209,102,0.3);
+      background: rgba(255,209,102,0.06);
+      position: relative;
+    }
+    .testimonial-card.featured::before {
+      content: '❝';
+      position: absolute;
+      top: 16px; right: 24px;
+      font-size: 4rem;
+      color: rgba(255,209,102,0.15);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .featured-badge {
+      display: inline-block;
+      background: rgba(255,209,102,0.15);
+      border: 1px solid rgba(255,209,102,0.3);
+      color: #FFD166;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .testimonial-preview { display: block; }
+    .testimonial-more { display: none; }
+    .testimonial-more.open { display: block; }
+    .read-more-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 4px;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+    }
+    .read-more-btn:hover { background: rgba(255,255,255,0.1); color: white; }
     .reviewer { display: flex; align-items: center; gap: 12px; }
     .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: white; }
     .reviewer-name { font-weight: 800; color: white; }
@@ -728,6 +775,28 @@
             </div>
           </div>
         </div>
+
+        <!-- RESEÑA DESTACADA -->
+        <div class="testimonial-card featured reveal">
+          <div class="featured-badge">⭐ Reseña Destacada</div>
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-preview">"GloryBer's Academy ha sido verdaderamente una bendición para nuestra familia. La señora Gloria, la señorita María y la señorita Irma son maestras increíbles que genuinamente se preocupan por los niños a su cargo. Mis hijas han aprendido muchísimo con ellas y siempre llegan a casa emocionadas por compartir lo que hicieron ese día."</p>
+          <div class="testimonial-more" id="review-more-es">
+            <p>"Están aprendiendo en español e inglés, participan en ejercicios y actividades divertidas, y están creciendo de maneras muy positivas. El ambiente es seguro, creativo y afectuoso — realmente se siente como un hogar lejos del hogar. Los niños reciben comidas y meriendas balanceadas, y se divierten tanto durante el día que casi no quieren irse cuando llega la hora de salida.</p>
+            <p>También aprecio mucho cómo mantienen a los padres conectados con lo que los niños están aprendiendo. Regularmente comparten actividades a través de fotos y videos, y cada mes llevan a casa proyectos para que podamos ver en qué han estado trabajando. Incluso extienden el aprendizaje más allá del aula enviando pequeñas actividades de 'tarea', lo cual es una manera muy atenta de mantener a los niños comprometidos.</p>
+            <p>Lo que hace a GloryBer's Academy aún más especial es cómo incluyen a las familias. Organizan eventos especiales como desayunos navideños para los padres e incluso dan regalos familiares en las fiestas, lo que te hace sentir parte de su familia extendida. Además, la comunicación siempre es clara y constante, lo cual realmente apreciamos.</p>
+            <p>Llevamos más de tres años siendo parte de la familia GloryBer's, y honestamente no puedo pensar en una guardería mejor para que nuestras hijas aprendan, crezcan y sean cuidadas. Amamos verdaderamente a GloryBer's Academy."</p>
+          </div>
+          <button class="read-more-btn" onclick="toggleReviewEs(this)">Leer reseña completa ▾</button>
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,var(--green),var(--blue));">H</div>
+            <div>
+              <div class="reviewer-name">Helen A.</div>
+              <div class="reviewer-source">Familia GloryBer's · 3+ Años</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -876,6 +945,14 @@
     document.querySelectorAll('.program-card-wrap').forEach(card => {
       card.addEventListener('click', () => card.classList.toggle('flipped'));
     });
+  
+    // Read more toggle for featured review
+    function toggleReviewEs(btn) {
+      const more = document.getElementById('review-more-es');
+      const isOpen = more.classList.contains('open');
+      more.classList.toggle('open');
+      btn.textContent = isOpen ? 'Leer reseña completa ▾' : 'Leer menos ▴';
+    }
   </script>
 </body>
 </html>
