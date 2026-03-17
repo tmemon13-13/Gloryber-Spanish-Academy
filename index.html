@@ -152,49 +152,144 @@
     /* ===== TESTIMONIALS ===== */
     .testimonials-section {
       background: var(--dark);
-      padding: 80px 40px;
+      padding: 80px 0;
+      overflow: hidden;
     }
 
     .testimonials-inner {
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
+      padding: 0 40px;
     }
 
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
+    /* CAROUSEL */
+    .carousel-viewport {
+      overflow: hidden;
       margin-top: 50px;
-      text-align: left;
+      cursor: grab;
+      user-select: none;
+    }
+    .carousel-viewport:active { cursor: grabbing; }
+
+    .testimonials-grid {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: scrollReviews 40s linear infinite;
+      padding-bottom: 8px;
+    }
+
+    .testimonials-grid.paused { animation-play-state: paused; }
+
+    @keyframes scrollReviews {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .testimonial-card {
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 20px;
-      padding: 32px;
+      padding: 28px;
+      width: 340px;
+      flex-shrink: 0;
+      text-align: left;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .testimonial-card:hover {
+      background: rgba(255,255,255,0.11);
+      border-color: rgba(255,255,255,0.2);
     }
 
-    .stars { color: var(--yellow); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .testimonial-card.featured {
+      width: 420px;
+      border: 1px solid rgba(255,209,102,0.3);
+      background: rgba(255,209,102,0.06);
+      position: relative;
+    }
+    .testimonial-card.featured::before {
+      content: '❝';
+      position: absolute;
+      top: 12px; right: 20px;
+      font-size: 3.5rem;
+      color: rgba(255,209,102,0.15);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .stars { color: var(--yellow); font-size: 1rem; letter-spacing: 2px; margin-bottom: 12px; }
 
     .testimonial-card p {
       color: rgba(255,255,255,0.85);
-      line-height: 1.7;
+      line-height: 1.65;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       font-style: italic;
+      font-size: 0.92rem;
     }
 
     .reviewer { display: flex; align-items: center; gap: 12px; }
     .reviewer-avatar {
-      width: 44px; height: 44px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; font-weight: 800; color: white;
+      font-size: 1.1rem; font-weight: 800; color: white;
+      flex-shrink: 0;
     }
-    .reviewer-name { font-weight: 800; color: white; }
-    .reviewer-source { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+    .reviewer-name { font-weight: 800; color: white; font-size: 0.95rem; }
+    .reviewer-source { font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+
+    .featured-badge {
+      display: inline-block;
+      background: rgba(255,209,102,0.15);
+      border: 1px solid rgba(255,209,102,0.3);
+      color: #FFD166;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .testimonial-preview { display: block; }
+    .testimonial-more { display: none; }
+    .testimonial-more.open { display: block; }
+    .read-more-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      border-radius: 50px;
+      padding: 5px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 2px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+    .read-more-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+
+    /* PAUSE INDICATOR */
+    .carousel-hint {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+    .pause-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      margin: 0 3px;
+      transition: background 0.3s;
+    }
+    .pause-dot.active { background: var(--yellow); }
 
     /* FEATURED TESTIMONIAL */
     .testimonial-card.featured {
@@ -538,8 +633,10 @@
     <div class="testimonials-inner">
       <div class="section-tag" style="background:rgba(255,255,255,0.15);color:white;">💬 What Parents Say</div>
       <h2 class="section-title" style="color:white;">Families Love GloryBer's ❤️</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal">
+    </div>
+    <div class="carousel-viewport" id="reviewCarousel">
+      <div class="testimonials-grid" id="reviewTrack">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"I love love LOVE this daycare, the care provider, and her assistant. I toured many daycares and this is the first & only one that met all of my requirements. The daycare is filled with natural light — separate rooms for the infants, an art and music room, and a large play & learning space."</p>
           <div class="reviewer">
@@ -550,7 +647,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card reveal">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"Ms. Gloria Elizabeth has been an amazing blessing to our son Elijah. We are excited to have him in this daycare. He has learned so much! We couldn't be happier with the care, attention, and love she gives every child."</p>
           <div class="reviewer">
@@ -562,7 +659,7 @@
           </div>
         </div>
 
-        <div class="testimonial-card reveal">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"We've had a wonderful experience with Gloryber's Academy and highly recommend it. Our son has been here for over two years, and our daughter has been attending for several months, and both genuinely enjoy going each day. The teachers are caring, professional, and very communicative, which gives us so much peace of mind."</p>
           <div class="reviewer">
@@ -574,7 +671,7 @@
           </div>
         </div>
 
-        <div class="testimonial-card reveal">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"Our experience has been excellent. The staff is so loving and caters to the different needs of the children. Our young child greets the caretakers with hugs when they arrive and is always well taken care of. The environment is one of love, learning, creativity, and friendship."</p>
           <div class="reviewer">
@@ -586,7 +683,7 @@
           </div>
         </div>
 
-        <div class="testimonial-card reveal">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"Absolutely excellent! From the professional and courteous demeanor of the staff to the joyful and loving welcome the children receive every day, this place does not disappoint. Our children came home speaking both Spanish and English as well as learning key building blocks at the kindergarten level."</p>
           <div class="reviewer">
@@ -598,7 +695,7 @@
           </div>
         </div>
 
-        <div class="testimonial-card reveal">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"Gloryber's Academy is great. They plan daily activities for the kids, have special events, and really go above and beyond. On top of that our kids learn and come back with lessons for us to practice with them. Highly recommend!"</p>
           <div class="reviewer">
@@ -610,7 +707,7 @@
           </div>
         </div>
 
-        <div class="testimonial-card reveal">
+        <div class="testimonial-card">
           <div class="stars">★★★★★</div>
           <p>"I can't say enough positive things about this daycare. The teachers and owners truly love the children — it honestly feels like dropping our kids off with family. The kids are taught Spanish, provided with great food, and engaged in thoughtful, fun activities every day. We are so thankful to have found such a safe, nurturing, and enriching environment."</p>
           <div class="reviewer">
@@ -623,7 +720,7 @@
         </div>
 
         <!-- FEATURED TESTIMONIAL -->
-        <div class="testimonial-card featured reveal">
+        <div class="testimonial-card featured">
           <div class="featured-badge">⭐ Featured Review</div>
           <div class="stars">★★★★★</div>
           <p class="testimonial-preview">"GloryBer's Academy has truly been a blessing for our family. Mrs. Gloria, Ms. Maria, and Ms. Irma are incredible teachers who genuinely care about the children in their care. My daughters have learned so much from them and always come home excited to share what they did that day."</p>
@@ -644,6 +741,17 @@
         </div>
 
       </div>
+    </div><!-- end carousel-viewport -->
+    <div class="testimonials-inner">
+      <div class="carousel-hint">
+        <span class="pause-dot active" id="dot1"></span>
+        <span class="pause-dot" id="dot2"></span>
+        <span class="pause-dot" id="dot3"></span>
+        &nbsp; Click any review to pause &nbsp;
+        <span class="pause-dot" id="dot4"></span>
+        <span class="pause-dot" id="dot5"></span>
+        <span class="pause-dot active" id="dot6"></span>
+      </div>
     </div>
   </div>
 
@@ -662,6 +770,40 @@
   <script src="shared.js"></script>
   <script>
     initShared('index.html');
+
+    // Carousel logic
+    const track = document.getElementById('reviewTrack');
+    const viewport = document.getElementById('reviewCarousel');
+    let paused = false;
+
+    // Duplicate cards for seamless infinite loop
+    const original = track.innerHTML;
+    track.innerHTML = original + original;
+
+    // Pause on click
+    viewport.addEventListener('click', () => {
+      paused = !paused;
+      track.classList.toggle('paused', paused);
+      document.querySelectorAll('.pause-dot').forEach((d, i) => {
+        d.classList.toggle('active', paused ? i === 2 || i === 3 : i === 0 || i === 5);
+      });
+    });
+
+    // Drag to scroll
+    let isDown = false, startX, scrollLeft;
+    viewport.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - viewport.offsetLeft;
+      scrollLeft = viewport.scrollLeft;
+    });
+    viewport.addEventListener('mouseleave', () => { isDown = false; });
+    viewport.addEventListener('mouseup', () => { isDown = false; });
+    viewport.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - viewport.offsetLeft;
+      viewport.scrollLeft = scrollLeft - (x - startX);
+    });
 
     function toggleReview(btn) {
       const more = document.getElementById('review-more');
