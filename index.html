@@ -196,6 +196,54 @@
     .reviewer-name { font-weight: 800; color: white; }
     .reviewer-source { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 600; }
 
+    /* FEATURED TESTIMONIAL */
+    .testimonial-card.featured {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(255,209,102,0.3);
+      background: rgba(255,209,102,0.06);
+      position: relative;
+    }
+    .testimonial-card.featured::before {
+      content: '❝';
+      position: absolute;
+      top: 16px; right: 24px;
+      font-size: 4rem;
+      color: rgba(255,209,102,0.15);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .featured-badge {
+      display: inline-block;
+      background: rgba(255,209,102,0.15);
+      border: 1px solid rgba(255,209,102,0.3);
+      color: #FFD166;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .testimonial-preview { display: block; }
+    .testimonial-more { display: none; }
+    .testimonial-more.open { display: block; }
+    .read-more-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 4px;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+    }
+    .read-more-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+
     /* ===== SLOGAN BANNER ===== */
     .slogan-banner {
       background: linear-gradient(135deg, var(--dark) 0%, #2A1A4E 100%);
@@ -513,6 +561,28 @@
             </div>
           </div>
         </div>
+
+        <!-- FEATURED TESTIMONIAL -->
+        <div class="testimonial-card featured reveal">
+          <div class="featured-badge">⭐ Featured Review</div>
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-preview">"GloryBer's Academy has truly been a blessing for our family. Mrs. Gloria, Ms. Maria, and Ms. Irma are incredible teachers who genuinely care about the children in their care. My daughters have learned so much from them and always come home excited to share what they did that day."</p>
+          <div class="testimonial-more" id="review-more">
+            <p>"They are learning in both Spanish and English, participate in fun exercises and activities, and are constantly growing in such positive ways. The environment is safe, creative, and nurturing — it truly feels like a home away from home. The kids are served well-balanced meals and snacks, and they have so much fun throughout the day that they rarely want to leave when it's time for pickup.</p>
+            <p>I also really appreciate how they keep parents connected to what the children are learning. They regularly share activities through pictures and videos, and every month, they bring home projects so we can see what they've been working on. They even extend learning beyond the classroom by sending home little 'homework' activities, which is such a thoughtful way to keep the kids engaged.</p>
+            <p>What makes GloryBer's Academy even more special is how they include families. They host thoughtful events like holiday breakfasts for parents and even give family holiday gifts, which makes you feel like part of their extended family. Additionally, communication is always clear and consistent, which we really appreciate.</p>
+            <p>We've been part of the GloryBer family for over three years now, and I honestly can't think of a better daycare for our daughters to learn, grow, and be cared for. We truly love GloryBer's Academy."</p>
+          </div>
+          <button class="read-more-btn" onclick="toggleReview(this)">Read full review ▾</button>
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,var(--green),var(--blue));">H</div>
+            <div>
+              <div class="reviewer-name">Helen A.</div>
+              <div class="reviewer-source">GloryBer's Family · 3+ Years</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -532,6 +602,13 @@
   <script src="shared.js"></script>
   <script>
     initShared('index.html');
+
+    function toggleReview(btn) {
+      const more = document.getElementById('review-more');
+      const isOpen = more.classList.contains('open');
+      more.classList.toggle('open');
+      btn.textContent = isOpen ? 'Read full review ▾' : 'Show less ▴';
+    }
   </script>
 </body>
 </html>
