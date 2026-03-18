@@ -15,42 +15,103 @@
       margin-top: 48px;
     }
 
+    /* FLIP CARD SYSTEM */
+    .program-card-wrap {
+      height: 260px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
     .program-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 24px;
-      padding: 36px 28px;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .program-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
 
-    .program-card.red    { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
-    .program-card.blue   { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
-    .program-card.green  { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
-    .program-card.yellow { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
-    .program-card.orange { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
-    .program-card.purple { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
+    .program-card-wrap:hover .program-card,
+    .program-card-wrap.flipped .program-card {
+      transform: rotateY(180deg);
+    }
 
-    .program-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+    .program-card-front,
+    .program-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
 
-    .program-card h3 {
+    .program-card-front {
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .program-card-wrap.red    .program-card-front { background: linear-gradient(135deg, #FFE0E3, #FFCDD1); }
+    .program-card-wrap.blue   .program-card-front { background: linear-gradient(135deg, #D6EFFF, #C0E4FF); }
+    .program-card-wrap.green  .program-card-front { background: linear-gradient(135deg, #CAFFEF, #AAFFE7); }
+    .program-card-wrap.yellow .program-card-front { background: linear-gradient(135deg, #FFF5CC, #FFE880); }
+    .program-card-wrap.orange .program-card-front { background: linear-gradient(135deg, #FFE5D9, #FFD0BA); }
+    .program-card-wrap.purple .program-card-front { background: linear-gradient(135deg, #F3E8FF, #E8D5FF); }
+
+    .program-card-back {
+      transform: rotateY(180deg);
+      background: #111;
+    }
+
+    .program-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.88;
+    }
+
+    .program-card-back .back-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+      color: white;
       font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem;
-      color: var(--dark);
-      margin-bottom: 10px;
+      font-size: 1.1rem;
+      padding: 20px 18px 14px;
     }
 
-    .program-card p {
-      font-size: 0.92rem;
+    .program-emoji { font-size: 2.6rem; margin-bottom: 12px; display: block; }
+
+    .program-card-front h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .program-card-front p {
+      font-size: 0.88rem;
       color: #444;
-      line-height: 1.6;
+      line-height: 1.55;
       font-weight: 600;
     }
 
     .program-esp {
-      margin-top: 12px;
+      margin-top: 10px;
       font-family: 'Fredoka One', cursive;
-      font-size: 1rem;
+      font-size: 0.9rem;
       opacity: 0.5;
       font-style: italic;
+    }
+
+    .flip-hint {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     /* MEALS SECTION */
@@ -156,14 +217,13 @@
 
     @media (max-width: 900px) {
       .programs-grid { grid-template-columns: 1fr 1fr; }
-      .meals-inner { grid-template-columns: 1fr; gap: 40px; }
-      .enrollment-grid { grid-template-columns: 1fr 1fr; }
-      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .program-card-wrap { height: 240px; }
       .meals-inner { grid-template-columns: 1fr; gap: 40px; }
       .enrollment-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       .programs-grid { grid-template-columns: 1fr; }
+      .program-card-wrap { height: 220px; }
       .enrollment-grid { grid-template-columns: 1fr; }
       .meals-section { padding: 60px 20px; }
     }
@@ -185,43 +245,99 @@
       <div class="section-tag tag-blue">Our Programs</div>
       <h2 class="section-title">Something for Every Stage of Childhood ✨</h2>
     </div>
+    <p class="flip-hint">✨ Hover cards to see photos · Pasa el cursor para ver fotos</p>
     <div class="programs-grid">
-      <div class="program-card red reveal">
-        <span class="program-emoji">🍼</span>
-        <h3>Infant Care</h3>
-        <p>Warm, attentive care for our tiniest learners. We create a safe and soothing environment to support healthy development from day one — including separate infant rooms and monitored nap times.</p>
-        <div class="program-esp">Cuidado de Bebés</div>
+
+      <div class="program-card-wrap red reveal">
+        <div class="program-card">
+          <div class="program-card-front">
+            <span class="program-emoji">🍼</span>
+            <h3>Infant Care</h3>
+            <p>Warm, attentive care for our tiniest learners — separate infant rooms, monitored nap times, and routines tailored to each baby.</p>
+            <div class="program-esp">Cuidado de Bebés</div>
+          </div>
+          <div class="program-card-back">
+            <img src="images/gallery-11.png" alt="Baby at GloryBer's" />
+            <div class="back-label">🍼 Infant Care</div>
+          </div>
+        </div>
       </div>
-      <div class="program-card blue reveal">
-        <span class="program-emoji">🧸</span>
-        <h3>Toddler Program</h3>
-        <p>Learning through play, songs, and stories in both English and Spanish. Designed to build vocabulary, motor skills, and social confidence in our little explorers.</p>
-        <div class="program-esp">Programa para Niños Pequeños</div>
+
+      <div class="program-card-wrap blue reveal">
+        <div class="program-card">
+          <div class="program-card-front">
+            <span class="program-emoji">🧸</span>
+            <h3>Toddler Program</h3>
+            <p>Learning through play, songs, and stories in English and Spanish. Building vocabulary, motor skills, and social confidence.</p>
+            <div class="program-esp">Programa para Niños Pequeños</div>
+          </div>
+          <div class="program-card-back">
+            <img src="images/gallery-4.png" alt="Kids in art activity" />
+            <div class="back-label">🧸 Toddler Program</div>
+          </div>
+        </div>
       </div>
-      <div class="program-card green reveal">
-        <span class="program-emoji">🎓</span>
-        <h3>Pre-K Readiness</h3>
-        <p>Preparing children for kindergarten with age-appropriate literacy, numeracy, and bilingual language development — giving them a head start for school and beyond.</p>
-        <div class="program-esp">Preparación Pre-Kinder</div>
+
+      <div class="program-card-wrap green reveal">
+        <div class="program-card">
+          <div class="program-card-front">
+            <span class="program-emoji">🎓</span>
+            <h3>Pre-K Readiness</h3>
+            <p>Preparing children for kindergarten with literacy, numeracy, and bilingual language development — a head start for school and beyond.</p>
+            <div class="program-esp">Preparación Pre-Kinder</div>
+          </div>
+          <div class="program-card-back">
+            <img src="images/gallery-24.png" alt="Children in Pre-K readiness class" />
+            <div class="back-label">🎓 Pre-K Readiness</div>
+          </div>
+        </div>
       </div>
-      <div class="program-card yellow reveal">
-        <span class="program-emoji">🗣️</span>
-        <h3>Spanish Immersion</h3>
-        <p>Our signature bilingual curriculum weaves Spanish naturally into every part of the day — songs, instructions, stories, and play. Research shows bilingual children have stronger cognitive flexibility.</p>
-        <div class="program-esp">Inmersión en Español</div>
+
+      <div class="program-card-wrap yellow reveal">
+        <div class="program-card">
+          <div class="program-card-front">
+            <span class="program-emoji">🗣️</span>
+            <h3>Spanish Immersion</h3>
+            <p>Our signature bilingual curriculum weaves Spanish naturally into every part of the day — songs, instructions, stories, and play.</p>
+            <div class="program-esp">Inmersión en Español</div>
+          </div>
+          <div class="program-card-back">
+            <img src="images/gallery-5.png" alt="Special visit at GloryBer's" />
+            <div class="back-label">🗣️ Spanish Immersion</div>
+          </div>
+        </div>
       </div>
-      <div class="program-card orange reveal">
-        <span class="program-emoji">🎨</span>
-        <h3>Art & Music</h3>
-        <p>A dedicated art and music room where children express themselves through painting, drawing, crafts, and singing — fostering creativity and fine motor development.</p>
-        <div class="program-esp">Arte y Música</div>
+
+      <div class="program-card-wrap orange reveal">
+        <div class="program-card">
+          <div class="program-card-front">
+            <span class="program-emoji">🎨</span>
+            <h3>Art & Music</h3>
+            <p>Painting, drawing, crafts, and singing — a dedicated space where children express themselves and develop creativity and fine motor skills.</p>
+            <div class="program-esp">Arte y Música</div>
+          </div>
+          <div class="program-card-back">
+            <img src="images/gallery-2.png" alt="Art activity at GloryBer's" />
+            <div class="back-label">🎨 Art & Music</div>
+          </div>
+        </div>
       </div>
-      <div class="program-card purple reveal">
-        <span class="program-emoji">🤸</span>
-        <h3>Physical Development</h3>
-        <p>Daily structured physical activity both indoors and outdoors. From playground time to tummy time for infants, movement is part of every day at GloryBer's.</p>
-        <div class="program-esp">Desarrollo Físico</div>
+
+      <div class="program-card-wrap purple reveal">
+        <div class="program-card">
+          <div class="program-card-front">
+            <span class="program-emoji">🤸</span>
+            <h3>Physical Development</h3>
+            <p>Daily structured physical activity indoors and outdoors. Movement is part of every day at GloryBer's, from playground time to tummy time.</p>
+            <div class="program-esp">Desarrollo Físico</div>
+          </div>
+          <div class="program-card-back">
+            <img src="images/gallery-9.png" alt="Outdoor time at GloryBer's" />
+            <div class="back-label">🤸 Physical Development</div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -293,6 +409,12 @@
   </div>
 
   <script src="shared.js"></script>
-  <script>initShared('programs.html');</script>
+  <script>
+    initShared('programs.html');
+    // Mobile tap to flip
+    document.querySelectorAll('.program-card-wrap').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+  </script>
 </body>
 </html>
