@@ -564,7 +564,12 @@
       .contact-form-wrap { padding: 28px 20px; }
     }
     /* CARD SLIDESHOW */
-    .card-slideshow { position: relative; }
+    .card-slideshow {
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      overflow: hidden;
+    }
     .card-slideshow .slide {
       position: absolute;
       inset: 0;
@@ -733,10 +738,12 @@
             <h3>Comidas Saludables</h3>
             <p>Ofrecemos comidas y meriendas nutritivas y caseras durante todo el día para alimentar el aprendizaje y el crecimiento.</p>
           </div>
-          <div class="program-card-back card-slideshow">
-            <div class="slide active"><img src="images/meals-1.jpg" alt="Comida casera en GloryBer's" /></div>
-            <div class="slide"><img src="images/meals-2.jpg" alt="Merienda nutritiva en GloryBer's" /></div>
-            <div class="back-label">🍎 ¡Rico y Nutritivo!</div>
+          <div class="program-card-back">
+            <div class="card-slideshow">
+              <div class="slide active"><img src="images/meals-1.jpg" alt="Comida casera en GloryBer's" /></div>
+              <div class="slide"><img src="images/meals-2.jpg" alt="Merienda nutritiva en GloryBer's" /></div>
+              <div class="back-label">🍎 ¡Rico y Nutritivo!</div>
+            </div>
           </div>
         </div>
       </div>
