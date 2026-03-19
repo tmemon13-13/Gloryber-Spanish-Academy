@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers | GloryBer's Spanish Academy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <style>
+
+    /* INTRO */
+    .careers-intro {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .careers-intro p {
+      font-size: 1.05rem;
+      color: #555;
+      line-height: 1.75;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* WHY WORK HERE */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .why-card {
+      background: white;
+      border-radius: 22px;
+      padding: 32px 24px;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .why-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.11);
+    }
+
+    .why-card:nth-child(1) { border-top: 5px solid var(--red); }
+    .why-card:nth-child(2) { border-top: 5px solid var(--blue); }
+    .why-card:nth-child(3) { border-top: 5px solid var(--green); }
+    .why-card:nth-child(4) { border-top: 5px solid var(--yellow); }
+    .why-card:nth-child(5) { border-top: 5px solid var(--orange); }
+    .why-card:nth-child(6) { border-top: 5px solid var(--purple, #C084FC); }
+
+    .why-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
+
+    .why-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .why-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    /* POSITIONS */
+    .positions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .position-card {
+      background: white;
+      border-radius: 22px;
+      padding: 32px 36px;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .position-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.11);
+    }
+
+    .position-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #E8F8FF;
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      padding: 6px 14px;
+      margin-bottom: 10px;
+    }
+
+    .position-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .position-card p {
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.65;
+      font-weight: 600;
+      max-width: 680px;
+    }
+
+    .position-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .position-tag {
+      background: #F5F5F5;
+      color: #555;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 5px 12px;
+    }
+
+    /* FORM SECTION */
+    .apply-section {
+      background: linear-gradient(135deg, #FFF9E6, #E8F8FF);
+      border-radius: 32px;
+      padding: 56px 48px;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .apply-section h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .apply-section .esp {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: #888;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .apply-section p {
+      font-size: 0.98rem;
+      color: #555;
+      line-height: 1.75;
+      font-weight: 600;
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .form-preview {
+      background: white;
+      border-radius: 22px;
+      padding: 36px;
+      max-width: 640px;
+      margin: 36px auto 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      text-align: left;
+    }
+
+    .form-preview h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-question {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #F0F0F0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .form-question:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .q-num {
+      background: var(--red);
+      color: white;
+      font-weight: 800;
+      font-size: 0.78rem;
+      border-radius: 50%;
+      min-width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .q-text strong {
+      display: block;
+      font-weight: 800;
+      color: var(--dark);
+      font-size: 0.9rem;
+      margin-bottom: 3px;
+    }
+
+    .q-text span {
+      font-size: 0.82rem;
+      color: #888;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .apply-btn-wrap { margin-top: 36px; }
+
+    .apply-btn {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.25rem;
+      padding: 18px 44px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 24px rgba(230,57,70,0.35);
+    }
+
+    .apply-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(230,57,70,0.45);
+    }
+
+    .apply-note {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #999;
+      font-weight: 600;
+    }
+
+    /* BILINGUAL BANNER */
+    .bilingual-banner {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 48px 40px;
+    }
+
+    .bilingual-banner h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.9rem;
+      margin-bottom: 10px;
+    }
+
+    .bilingual-banner p {
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+    }
+
+    @media (max-width: 900px) {
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .position-card { grid-template-columns: 1fr; }
+      .apply-section { padding: 40px 24px; }
+      .form-preview { padding: 28px 20px; }
+    }
+
+    @media (max-width: 600px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .position-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-tag tag-green">Careers · Empleos</div>
+      <h1>Join Our Team! 🌟<br/>¡Únete a Nuestro Equipo!</h1>
+      <p>Help us raise the next generation of bilingual learners. We're looking for warm, passionate people who love children.</p>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section-wrap">
+    <div class="careers-intro reveal">
+      <div class="section-tag tag-blue">Who We Are · Quiénes Somos</div>
+      <h2 class="section-title">More Than a Job — It's a Calling 💛</h2>
+      <p>At GloryBer's Spanish Academy, we believe every child deserves a nurturing, bilingual environment where they can grow, explore, and thrive. Our team is the heart of everything we do — and we're always looking for caring, dedicated individuals to grow with us.</p>
+      <p>We are a licensed, home-based daycare and Spanish immersion academy serving infants through Pre-K in Alexandria, VA. If you are patient, joyful, bilingual (or learning!), and passionate about early childhood education, we'd love to hear from you.</p>
+      <p><em>Somos una guardería bilingüe con licencia, dedicada a brindar un ambiente cálido y enriquecedor para los más pequeños. Si eres una persona apasionada por la educación temprana, nos encantaría conocerte.</em></p>
+    </div>
+  </div>
+
+  <!-- WHY WORK HERE -->
+  <div class="section-wrap" style="background: linear-gradient(135deg,#FAFFF9,#F0F9FF); padding-top: 60px; padding-bottom: 60px;">
+    <div class="reveal" style="text-align:center; margin-bottom: 8px;">
+      <div class="section-tag tag-green">Why GloryBer's · Por Qué Elegirnos</div>
+      <h2 class="section-title">Why You'll Love Working Here ❤️</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="why-icon">🌱</span>
+        <h3>Grow With Us</h3>
+        <p>We invest in our team. Receive mentorship, training, and opportunities to develop your early childhood education skills.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">💛</span>
+        <h3>Warm Family Culture</h3>
+        <p>We treat our staff like family. You'll feel supported, appreciated, and valued every single day.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🗣️</span>
+        <h3>Bilingual Environment</h3>
+        <p>Immerse yourself in a rich bilingual setting. Practice and grow your Spanish and English in a real, joyful context.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🎨</span>
+        <h3>Creative Freedom</h3>
+        <p>Bring your ideas to life! We encourage creativity in lesson planning, activities, and how you connect with children.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🏡</span>
+        <h3>Small, Caring Setting</h3>
+        <p>Work in an intimate, home-based environment where you truly know every child and family by name.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🎓</span>
+        <h3>Make a Real Impact</h3>
+        <p>The early years shape a lifetime. Every day, you'll help lay the foundation for a child's love of learning.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN POSITIONS -->
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center; margin-bottom: 8px;">
+      <div class="section-tag tag-red">Open Positions · Puestos Disponibles</div>
+      <h2 class="section-title">We're Hiring! 🎉</h2>
+      <p class="section-desc" style="margin: 0 auto;">Don't see the perfect fit? Apply anyway — we're always happy to meet passionate people.</p>
+    </div>
+    <div class="positions-list">
+
+      <div class="position-card reveal">
+        <div>
+          <div class="position-badge">🍼 Now Hiring</div>
+          <h3>Infant Caregiver</h3>
+          <p>Care for our youngest learners (0–12 months) with warmth, patience, and attentiveness. Responsibilities include feeding, diapering, tummy time, sensory play, and communicating daily updates to families. A nurturing spirit and calm presence are a must.</p>
+          <div class="position-tags">
+            <span class="position-tag">Full-time or Part-time</span>
+            <span class="position-tag">Bilingual a plus</span>
+            <span class="position-tag">CPR Certification preferred</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="position-card reveal">
+        <div>
+          <div class="position-badge" style="background:#E8F8FF;color:var(--blue);">🧸 Now Hiring</div>
+          <h3>Assistant Teacher</h3>
+          <p>Support our lead teachers in creating a joyful, structured learning environment for toddlers and Pre-K children. Help facilitate activities, reinforce bilingual vocabulary, assist during mealtimes, and build warm relationships with each child and family.</p>
+          <div class="position-tags">
+            <span class="position-tag">Full-time or Part-time</span>
+            <span class="position-tag">Spanish/English bilingual preferred</span>
+            <span class="position-tag">Experience with young children</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="position-card reveal">
+        <div>
+          <div class="position-badge" style="background:#CAFFEF;color:#009a7a;">🎓 Now Hiring</div>
+          <h3>Lead Teacher</h3>
+          <p>Plan and lead engaging, age-appropriate bilingual curriculum for toddlers through Pre-K. As a Lead Teacher, you'll design lesson plans, track developmental milestones, communicate with families, and set the tone for a warm, enriching classroom experience.</p>
+          <div class="position-tags">
+            <span class="position-tag">Full-time</span>
+            <span class="position-tag">Bilingual (Spanish/English) required</span>
+            <span class="position-tag">Early childhood education background</span>
+            <span class="position-tag">CDA or degree preferred</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FORM PREVIEW + APPLY CTA -->
+  <div class="section-wrap">
+    <div class="apply-section reveal">
+      <div class="section-tag tag-red" style="margin: 0 auto 16px;">Apply Now · Aplica Ahora</div>
+      <h2>Ready to Apply? 🚀</h2>
+      <p class="esp">¿Lista/o para aplicar?</p>
+      <p>Click the button below to open our application form. We'll ask you a few quick questions to get to know you better. We review every application with care and will be in touch soon!</p>
+      <p><em>Haz clic en el botón para abrir el formulario de aplicación. ¡Revisamos cada solicitud con atención y nos pondremos en contacto pronto!</em></p>
+
+      <div class="form-preview">
+        <h4>📋 What the Application Covers · Lo que Incluye la Solicitud</h4>
+
+        <div class="form-question">
+          <div class="q-num">1</div>
+          <div class="q-text">
+            <strong>Full Name / Nombre completo</strong>
+            <span>Your first and last name</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">2</div>
+          <div class="q-text">
+            <strong>Phone Number & Email / Teléfono y correo electrónico</strong>
+            <span>Best way to reach you</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">3</div>
+          <div class="q-text">
+            <strong>Position of Interest / Puesto de interés</strong>
+            <span>Infant Caregiver, Assistant Teacher, or Lead Teacher</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">4</div>
+          <div class="q-text">
+            <strong>Availability / Disponibilidad</strong>
+            <span>Full-time, part-time, days and hours available</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">5</div>
+          <div class="q-text">
+            <strong>Experience with Children / Experiencia con niños</strong>
+            <span>Previous childcare, teaching, or related experience</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">6</div>
+          <div class="q-text">
+            <strong>Spanish Proficiency / Nivel de español</strong>
+            <span>Beginner, conversational, fluent, or native speaker</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">7</div>
+          <div class="q-text">
+            <strong>Education / Educación</strong>
+            <span>Highest level completed and relevant certifications (CDA, CPR, etc.)</span>
+          </div>
+        </div>
+        <div class="form-question">
+          <div class="q-num">8</div>
+          <div class="q-text">
+            <strong>Why GloryBer's? / ¿Por qué GloryBer's?</strong>
+            <span>Tell us a little about yourself and why you'd love to join our team</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="apply-btn-wrap">
+        <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="apply-btn">
+          Apply Now · Aplica Ahora 🌟
+        </a>
+        <p class="apply-note">Opens in a new tab · Se abre en una nueva pestaña</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILINGUAL BANNER -->
+  <div class="bilingual-banner">
+    <h2>¿Tienes preguntas? We're here! 💬</h2>
+    <p>Feel free to reach out to us directly at <a href="mailto:gloryberacademy@gmail.com" style="color:var(--yellow);font-weight:800;">gloryberacademy@gmail.com</a> or call <a href="tel:5713477360" style="color:var(--yellow);font-weight:800;">(571) 347-7360</a> if you'd like to learn more before applying.</p>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>initShared('careers.html');</script>
+</body>
+</html>
