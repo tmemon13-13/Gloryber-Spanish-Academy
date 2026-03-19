@@ -61,6 +61,7 @@ function getFooterHTML() {
             <li><a href="activities.html">Activities</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="careers.html">Careers</a></li>
           </ul>
         </div>
         <div class="footer-col">
