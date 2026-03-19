@@ -563,6 +563,22 @@
       .slogan-banner { padding: 50px 20px; }
       .contact-form-wrap { padding: 28px 20px; }
     }
+    /* CARD SLIDESHOW */
+    .card-slideshow { position: relative; }
+    .card-slideshow .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .card-slideshow .slide.active { opacity: 1; }
+    .card-slideshow .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-slideshow .back-label { z-index: 2; }
+
   </style>
 </head>
 <body>
@@ -690,7 +706,7 @@
             <p>Preparamos a los niños para el jardín de infantes con actividades de lectoescritura, matemáticas y desarrollo bilingüe.</p>
           </div>
           <div class="program-card-back">
-            <img src="images/gallery-24.png" alt="Niños en clase de preparación Pre-Kinder" />
+            <img src="images/gallery-7.png" alt="Niño con manualidad" />
             <div class="back-label">🎓 Listos para el Futuro</div>
           </div>
         </div>
@@ -717,8 +733,9 @@
             <h3>Comidas Saludables</h3>
             <p>Ofrecemos comidas y meriendas nutritivas y caseras durante todo el día para alimentar el aprendizaje y el crecimiento.</p>
           </div>
-          <div class="program-card-back">
-            <img src="images/gallery-6.png" alt="Hora de la merienda" />
+          <div class="program-card-back card-slideshow">
+            <div class="slide active"><img src="images/meals-1.jpg" alt="Comida casera en GloryBer's" /></div>
+            <div class="slide"><img src="images/meals-2.jpg" alt="Merienda nutritiva en GloryBer's" /></div>
             <div class="back-label">🍎 ¡Rico y Nutritivo!</div>
           </div>
         </div>
@@ -1021,6 +1038,18 @@
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="shared.js"></script>
   <script>
     initShared('espanol.html');
+
+    // Auto-rotating slideshow on card backs
+    document.querySelectorAll('.card-slideshow').forEach(slideshow => {
+      const slides = slideshow.querySelectorAll('.slide');
+      if (slides.length < 2) return;
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 2200);
+    });
 
     // Contact form
     const form = document.getElementById('contact-form');
