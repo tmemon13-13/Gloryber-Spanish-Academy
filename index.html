@@ -123,30 +123,114 @@
       margin-top: 48px;
     }
 
+    /* FLIP CARD SYSTEM */
     .why-card {
-      background: white;
-      border-radius: 20px;
-      padding: 32px 24px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
-      text-align: center;
-      transition: transform 0.3s;
+      height: 240px;
+      perspective: 1000px;
+      cursor: pointer;
     }
-    .why-card:hover { transform: translateY(-6px); }
+
+    .why-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 20px;
+    }
+
+    .why-card:hover .why-card-inner,
+    .why-card.flipped .why-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .why-card-front,
+    .why-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .why-card-front {
+      background: white;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .why-card-back {
+      transform: rotateY(180deg);
+      background: #111;
+    }
+
+    .why-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.88;
+    }
+
+    .why-card-back .back-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      padding: 20px 16px 12px;
+    }
+
+    /* SLIDESHOW on card back */
+    .why-slideshow {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .why-slideshow .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .why-slideshow .slide.active { opacity: 1; }
+    .why-slideshow .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.88;
+    }
+    .why-slideshow .back-label { z-index: 2; }
 
     .why-icon { font-size: 3rem; margin-bottom: 14px; display: block; }
 
-    .why-card h3 {
+    .why-card-front h3 {
       font-family: 'Fredoka One', cursive;
       font-size: 1.3rem;
       color: var(--dark);
       margin-bottom: 10px;
     }
 
-    .why-card p {
+    .why-card-front p {
       font-size: 0.9rem;
       color: #666;
       line-height: 1.6;
       font-weight: 600;
+    }
+
+    .why-flip-hint {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     /* ===== TESTIMONIALS ===== */
@@ -498,6 +582,7 @@
 
     @media (max-width: 900px) {
       .why-grid { grid-template-columns: 1fr 1fr; }
+      .why-card { height: 220px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .stats-strip { gap: 30px; padding: 24px 20px; }
       .photo-feature-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -509,6 +594,7 @@
     }
     @media (max-width: 600px) {
       .why-grid { grid-template-columns: 1fr; }
+      .why-card { height: 210px; }
       .photo-feature { padding: 60px 20px; }
       .photo-stack { height: 300px; }
       .photo-main { width: 90%; height: 240px; }
@@ -594,37 +680,94 @@
       <h2 class="section-title">A Place Where Every Child Shines ✨</h2>
       <p class="section-desc" style="margin:0 auto;">We combine warmth, education, and bilingual immersion to give your child the best possible start.</p>
     </div>
+    <p class="why-flip-hint">✨ Hover cards to see photos · Pasa el cursor para ver fotos</p>
     <div class="why-grid">
+
       <div class="why-card reveal">
-        <span class="why-icon">🗣️</span>
-        <h3>Bilingual Immersion</h3>
-        <p>Spanish and English woven naturally into every song, story, and activity throughout the day.</p>
+        <div class="why-card-inner">
+          <div class="why-card-front">
+            <span class="why-icon">🗣️</span>
+            <h3>Bilingual Immersion</h3>
+            <p>Spanish and English woven naturally into every song, story, and activity throughout the day.</p>
+          </div>
+          <div class="why-card-back">
+            <img src="images/gallery-16.png" alt="Bilingual learning at GloryBer's" />
+            <div class="back-label">🗣️ Bilingual Immersion</div>
+          </div>
+        </div>
       </div>
+
       <div class="why-card reveal">
-        <span class="why-icon">🏡</span>
-        <h3>Home-Like Environment</h3>
-        <p>A bright, warm, home-based setting filled with natural light, separate age rooms, and a dedicated art space.</p>
+        <div class="why-card-inner">
+          <div class="why-card-front">
+            <span class="why-icon">🏡</span>
+            <h3>Home-Like Environment</h3>
+            <p>A bright, warm, home-based setting filled with natural light, separate age rooms, and a dedicated art space.</p>
+          </div>
+          <div class="why-card-back">
+            <img src="images/space-1.jpg" alt="Play area at GloryBer's" />
+            <div class="back-label">🏡 Home-Like Environment</div>
+          </div>
+        </div>
       </div>
+
       <div class="why-card reveal">
-        <span class="why-icon">🍎</span>
-        <h3>Healthy Homemade Meals</h3>
-        <p>Nutritious, home-cooked meals and snacks provided throughout the day — no packed lunches needed.</p>
+        <div class="why-card-inner">
+          <div class="why-card-front">
+            <span class="why-icon">🍎</span>
+            <h3>Healthy Homemade Meals</h3>
+            <p>Nutritious, home-cooked meals and snacks provided throughout the day — no packed lunches needed.</p>
+          </div>
+          <div class="why-card-back why-slideshow">
+            <div class="slide active"><img src="images/meals-1.jpg" alt="Home-cooked meal at GloryBer's" /></div>
+            <div class="slide"><img src="images/meals-2.jpg" alt="Healthy snacks at GloryBer's" /></div>
+            <div class="back-label">🍎 Healthy Homemade Meals</div>
+          </div>
+        </div>
       </div>
+
       <div class="why-card reveal">
-        <span class="why-icon">📅</span>
-        <h3>Flexible Scheduling</h3>
-        <p>Need one day a week or full-time care? We accommodate all families. No one is turned away.</p>
+        <div class="why-card-inner">
+          <div class="why-card-front">
+            <span class="why-icon">📅</span>
+            <h3>Flexible Scheduling</h3>
+            <p>Need one day a week or full-time care? We accommodate all families. No one is turned away.</p>
+          </div>
+          <div class="why-card-back">
+            <img src="images/gallery-9.png" alt="Outdoor play at GloryBer's" />
+            <div class="back-label">📅 Flexible Scheduling</div>
+          </div>
+        </div>
       </div>
+
       <div class="why-card reveal">
-        <span class="why-icon">🎓</span>
-        <h3>Experienced Staff</h3>
-        <p>Our team brings years of childcare expertise and continues learning through county-approved courses.</p>
+        <div class="why-card-inner">
+          <div class="why-card-front">
+            <span class="why-icon">🎓</span>
+            <h3>Experienced Staff</h3>
+            <p>Our team brings years of childcare expertise and continues learning through county-approved courses.</p>
+          </div>
+          <div class="why-card-back">
+            <img src="images/gallery-1.png" alt="Teacher with student at GloryBer's" />
+            <div class="back-label">🎓 Experienced Staff</div>
+          </div>
+        </div>
       </div>
+
       <div class="why-card reveal">
-        <span class="why-icon">🤸</span>
-        <h3>Daily Activity & Play</h3>
-        <p>Structured indoor and outdoor physical activity every single day, rain or shine.</p>
+        <div class="why-card-inner">
+          <div class="why-card-front">
+            <span class="why-icon">🤸</span>
+            <h3>Daily Activity & Play</h3>
+            <p>Structured indoor and outdoor physical activity every single day, rain or shine.</p>
+          </div>
+          <div class="why-card-back">
+            <img src="images/gallery-6.png" alt="Play time at GloryBer's" />
+            <div class="back-label">🤸 Daily Activity & Play</div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -770,6 +913,23 @@
   <script src="shared.js"></script>
   <script>
     initShared('index.html');
+
+    // Mobile tap to flip
+    document.querySelectorAll('.why-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+
+    // Auto-rotating slideshow on meals card back
+    document.querySelectorAll('.why-slideshow').forEach(slideshow => {
+      const slides = slideshow.querySelectorAll('.slide');
+      if (slides.length < 2) return;
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 2200);
+    });
 
     // Carousel logic
     const track = document.getElementById('reviewTrack');
