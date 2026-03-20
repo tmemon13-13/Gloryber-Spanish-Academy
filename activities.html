@@ -103,27 +103,90 @@
       margin-top: 48px;
     }
 
+    /* FLIP CARD SYSTEM */
     .activity-card {
-      background: white;
-      border-radius: 20px;
-      padding: 30px 24px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
-      text-align: center;
-      transition: transform 0.3s;
+      height: 240px;
+      perspective: 1000px;
+      cursor: pointer;
     }
-    .activity-card:hover { transform: translateY(-6px); }
-    .activity-card .icon { font-size: 2.8rem; margin-bottom: 14px; display: block; }
-    .activity-card h3 {
+
+    .activity-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 20px;
+    }
+
+    .activity-card:hover .activity-card-inner,
+    .activity-card.flipped .activity-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .activity-card-front,
+    .activity-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .activity-card-front {
+      background: white;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .activity-card-back {
+      transform: rotateY(180deg);
+      background: #111;
+    }
+
+    .activity-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.88;
+    }
+
+    .activity-card-back .back-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      padding: 20px 16px 12px;
+    }
+
+    .activity-card-front .icon { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+    .activity-card-front h3 {
       font-family: 'Fredoka One', cursive;
       font-size: 1.2rem;
       color: var(--dark);
       margin-bottom: 8px;
     }
-    .activity-card p {
+    .activity-card-front p {
       font-size: 0.88rem;
       color: #666;
       line-height: 1.6;
       font-weight: 600;
+    }
+
+    .activity-flip-hint {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     /* ===== PHOTO SECTION ===== */
@@ -194,14 +257,13 @@
 
     @media (max-width: 900px) {
       .activities-grid { grid-template-columns: 1fr 1fr; }
-      .photo-grid { grid-template-columns: 1fr; }
-      .schedule-item { grid-template-columns: 100px 1fr; }
-      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .activity-card { height: 220px; }
       .photo-grid { grid-template-columns: 1fr; }
       .schedule-item { grid-template-columns: 110px 1fr; }
     }
     @media (max-width: 600px) {
       .activities-grid { grid-template-columns: 1fr; }
+      .activity-card { height: 210px; }
       .photo-section { padding: 60px 20px; }
     }
   </style>
@@ -223,36 +285,85 @@
       <div class="section-tag tag-blue">What We Do Every Day</div>
       <h2 class="section-title">Always Something to Discover 🌟</h2>
     </div>
+    <p class="activity-flip-hint">✨ Hover cards to see photos · Pasa el cursor para ver fotos</p>
     <div class="activities-grid">
       <div class="activity-card reveal">
-        <span class="icon">🎨</span>
-        <h3>Art Projects</h3>
-        <p>Fine motor skills and creative exploration through painting, drawing, and crafts with a wide variety of materials.</p>
+        <div class="activity-card-inner">
+          <div class="activity-card-front">
+            <span class="icon">🎨</span>
+            <h3>Art Projects</h3>
+            <p>Fine motor skills and creative exploration through painting, drawing, and crafts with a wide variety of materials.</p>
+          </div>
+          <div class="activity-card-back">
+            <img src="images/gallery-4.png" alt="Art projects at GloryBer's" />
+            <div class="back-label">🎨 Art Projects</div>
+          </div>
+        </div>
       </div>
       <div class="activity-card reveal">
-        <span class="icon">📚</span>
-        <h3>Story Time</h3>
-        <p>Bilingual storytelling using colorful props and puppets — turning every story into an interactive language activity.</p>
+        <div class="activity-card-inner">
+          <div class="activity-card-front">
+            <span class="icon">📚</span>
+            <h3>Story Time</h3>
+            <p>Bilingual storytelling using colorful props and puppets — turning every story into an interactive language activity.</p>
+          </div>
+          <div class="activity-card-back">
+            <img src="images/gallery-2.png" alt="Story time at GloryBer's" />
+            <div class="back-label">📚 Story Time</div>
+          </div>
+        </div>
       </div>
       <div class="activity-card reveal">
-        <span class="icon">🏃</span>
-        <h3>Playground Time</h3>
-        <p>Outdoor play and exploration when weather permits, with fun indoor alternatives on rainy days.</p>
+        <div class="activity-card-inner">
+          <div class="activity-card-front">
+            <span class="icon">🏃</span>
+            <h3>Playground Time</h3>
+            <p>Outdoor play and exploration when weather permits, with fun indoor alternatives on rainy days.</p>
+          </div>
+          <div class="activity-card-back">
+            <img src="images/space-2.jpg" alt="Outdoor playground at GloryBer's" />
+            <div class="back-label">🏃 Playground Time</div>
+          </div>
+        </div>
       </div>
       <div class="activity-card reveal">
-        <span class="icon">🎵</span>
-        <h3>Music & Singing</h3>
-        <p>Songs, rhymes, and movement activities in both English and Spanish every single day.</p>
+        <div class="activity-card-inner">
+          <div class="activity-card-front">
+            <span class="icon">🎵</span>
+            <h3>Music & Singing</h3>
+            <p>Songs, rhymes, and movement activities in both English and Spanish every single day.</p>
+          </div>
+          <div class="activity-card-back">
+            <img src="images/gallery-5.png" alt="Music and fun at GloryBer's" />
+            <div class="back-label">🎵 Music & Singing</div>
+          </div>
+        </div>
       </div>
       <div class="activity-card reveal">
-        <span class="icon">🧩</span>
-        <h3>Educational Toys & Games</h3>
-        <p>Age-appropriate toys selected daily based on each child's developmental stage and abilities.</p>
+        <div class="activity-card-inner">
+          <div class="activity-card-front">
+            <span class="icon">🧩</span>
+            <h3>Educational Toys & Games</h3>
+            <p>Age-appropriate toys selected daily based on each child's developmental stage and abilities.</p>
+          </div>
+          <div class="activity-card-back">
+            <img src="images/gallery-24.png" alt="Learning activities at GloryBer's" />
+            <div class="back-label">🧩 Educational Toys & Games</div>
+          </div>
+        </div>
       </div>
       <div class="activity-card reveal">
-        <span class="icon">🌱</span>
-        <h3>Tummy Time & Motor Skills</h3>
-        <p>For our youngest learners — stimulating activities with textures, lights, and gym equipment to build gross motor skills.</p>
+        <div class="activity-card-inner">
+          <div class="activity-card-front">
+            <span class="icon">🌱</span>
+            <h3>Tummy Time & Motor Skills</h3>
+            <p>For our youngest learners — stimulating activities with textures, lights, and gym equipment to build gross motor skills.</p>
+          </div>
+          <div class="activity-card-back">
+            <img src="images/gallery-11.png" alt="Tummy time at GloryBer's" />
+            <div class="back-label">🌱 Tummy Time & Motor Skills</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -429,6 +540,11 @@
   <script src="shared.js"></script>
   <script>
     initShared('activities.html');
+
+    // Mobile tap to flip
+    document.querySelectorAll('.activity-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
 
     function switchTab(tab, btn) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
