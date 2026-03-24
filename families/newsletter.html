@@ -259,11 +259,11 @@
   <div class="archive">
     <h2>📚 Newsletter Archive</h2>
     <div class="archive-grid">
-      <div class="archive-card active" onclick="switchNewsletter('https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view?embed', '📬 April 2026 Newsletter', this)">
+      <div class="archive-card active" role="button" tabindex="0" data-embed="https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view?embed" data-label="📬 April 2026 Newsletter">
         <span>🌸</span>
         April 2026
       </div>
-      <div class="archive-card" onclick="switchNewsletter('https://www.canva.com/design/DAHDFnvPjgI/plNcUuyJtu6gtSE4bIrY6w/view?embed', '📬 March 2026 Newsletter', this)">
+      <div class="archive-card" role="button" tabindex="0" data-embed="https://www.canva.com/design/DAHDFnvPjgI/plNcUuyJtu6gtSE4bIrY6w/view?embed" data-label="📬 March 2026 Newsletter">
         <span>🍀</span>
         March 2026
       </div>
@@ -271,15 +271,25 @@
   </div>
 
   <script>
-    function switchNewsletter(embedUrl, label, card) {
-      // Update iframe
+    function switchNewsletter(card) {
+      const embedUrl = card.getAttribute('data-embed');
+      const label = card.getAttribute('data-label');
       document.querySelector('.embed-container iframe').src = embedUrl;
-      // Update label
       document.querySelector('.newsletter-label').textContent = label;
-      // Update active card
       document.querySelectorAll('.archive-card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
     }
+
+    document.querySelectorAll('.archive-card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchNewsletter(card);
+      });
+      card.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        switchNewsletter(card);
+      });
+    });
   </script>
 
   <!-- FOOTER -->
