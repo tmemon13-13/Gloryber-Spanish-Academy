@@ -89,6 +89,8 @@
       max-width: 700px;
       margin: 0 auto 60px;
       padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
     .embed-container {
@@ -111,6 +113,43 @@
       border: none;
       padding: 0;
       margin: 0;
+    }
+
+    /* TAB SYSTEM */
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      border: 2px solid var(--theme-light);
+      color: var(--theme);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    #tab-april:checked ~ .newsletter-wrap .tab-panel#panel-april,
+    #tab-march:checked ~ .newsletter-wrap .tab-panel#panel-march {
+      display: block;
+    }
+
+    #tab-april:checked ~ .newsletter-wrap label.tab-april-btn,
+    #tab-march:checked ~ .newsletter-wrap label.tab-march-btn {
+      background: var(--theme);
+      color: white;
+      border-color: var(--theme);
     }
 
     /* ARCHIVE SECTION */
@@ -234,22 +273,46 @@
     <p>This is your private family newsletter page. Here you'll find monthly updates, highlights, and news from Ms. Gloria and Ms. Gloria Elizabeth!</p>
   </div>
 
-  <!-- NEWSLETTER EMBED -->
+  <!-- NEWSLETTER TABS -->
+  <input type="radio" name="newsletter-tab" id="tab-april" checked style="display:none;">
+  <input type="radio" name="newsletter-tab" id="tab-march" style="display:none;">
+
   <div class="newsletter-wrap">
 
-    <!-- CURRENT NEWSLETTER LABEL -->
-    <div style="text-align:center; margin-bottom: 20px;">
-      <span class="newsletter-label" style="background:var(--theme); color:white; border-radius:50px; padding:6px 20px; font-weight:800; font-size:0.9rem;">📬 April 2026 Newsletter</span>
+    <!-- TAB BUTTONS -->
+    <div style="display:flex; gap:12px; justify-content:center; margin-bottom:20px; flex-wrap:wrap;">
+      <label for="tab-april" class="tab-btn tab-april-btn">
+        <span>🌸</span> April 2026
+      </label>
+      <label for="tab-march" class="tab-btn tab-march-btn">
+        <span>🍀</span> March 2026
+      </label>
     </div>
 
-    <!-- CANVA EMBED -->
-    <div class="embed-container">
-      <iframe
-        loading="lazy"
-        src="https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view?embed"
-        allowfullscreen="allowfullscreen"
-        allow="fullscreen">
-      </iframe>
+    <!-- APRIL EMBED -->
+    <div class="tab-panel" id="panel-april">
+      <div style="text-align:center; margin-bottom: 16px;">
+        <span style="background:var(--theme); color:white; border-radius:50px; padding:6px 20px; font-weight:800; font-size:0.9rem;">📬 April 2026 Newsletter</span>
+      </div>
+      <div class="embed-container">
+        <iframe loading="lazy"
+          src="https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view?embed"
+          allowfullscreen="allowfullscreen" allow="fullscreen">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- MARCH EMBED -->
+    <div class="tab-panel" id="panel-march">
+      <div style="text-align:center; margin-bottom: 16px;">
+        <span style="background:#2D8A4E; color:white; border-radius:50px; padding:6px 20px; font-weight:800; font-size:0.9rem;">📬 March 2026 Newsletter</span>
+      </div>
+      <div class="embed-container">
+        <iframe loading="lazy"
+          src="https://www.canva.com/design/DAHDFnvPjgI/plNcUuyJtu6gtSE4bIrY6w/view?embed"
+          allowfullscreen="allowfullscreen" allow="fullscreen">
+        </iframe>
+      </div>
     </div>
 
     <p style="text-align:center; margin-top:12px; font-size:0.8rem; color:#999;">
@@ -258,7 +321,7 @@
   </div>
 
   <!-- PRACTICE SPANISH AT HOME -->
-  <div style="max-width:700px; margin: 0 auto 40px; padding: 0 24px;">
+  <div style="max-width:700px; margin: 0 auto 40px; padding: 0 24px; position:relative; z-index:10;">
     <div style="background:white; border-radius:20px; padding:28px 28px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--theme-light); text-align:center;">
       <div style="font-size:2rem; margin-bottom:8px;">🎶</div>
       <h2 style="font-family:'Fredoka One',cursive; font-size:1.4rem; color:#1A1A2E; margin-bottom:8px;">Practice Spanish at Home!</h2>
@@ -272,7 +335,7 @@
   </div>
 
   <!-- CONNECT WITH US -->
-  <div style="max-width:700px; margin: 0 auto 40px; padding: 0 24px;">
+  <div style="max-width:700px; margin: 0 auto 40px; padding: 0 24px; position:relative; z-index:10;">
     <div style="background:white; border-radius:20px; padding:28px 28px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--theme-light); text-align:center;">
       <div style="font-size:2rem; margin-bottom:8px;">📱</div>
       <h2 style="font-family:'Fredoka One',cursive; font-size:1.4rem; color:#1A1A2E; margin-bottom:8px;">Connect With Us! / ¡Conéctate con Nosotras!</h2>
@@ -290,20 +353,6 @@
     </div>
   </div>
 
-  <!-- ARCHIVE -->
-  <div class="archive">
-    <h2>📚 Newsletter Archive</h2>
-    <div class="archive-grid">
-      <a class="archive-card active" href="https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view" target="_blank" rel="noopener">
-        <span>🌸</span>
-        April 2026
-      </a>
-      <a class="archive-card" href="https://www.canva.com/design/DAHDFnvPjgI/plNcUuyJtu6gtSE4bIrY6w/view" target="_blank" rel="noopener">
-        <span>🍀</span>
-        March 2026
-      </a>
-    </div>
-  </div>
 
   <!-- FOOTER -->
   <div class="footer">
