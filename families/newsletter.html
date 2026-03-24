@@ -136,6 +136,8 @@
     }
 
     .archive-card {
+      display: block;
+      text-decoration: none;
       background: white;
       border-radius: 14px;
       padding: 16px 24px;
@@ -255,42 +257,53 @@
     </p>
   </div>
 
-  <!-- ARCHIVE -->
-  <div class="archive">
-    <h2>📚 Newsletter Archive</h2>
-    <div class="archive-grid">
-      <div class="archive-card active" role="button" tabindex="0" data-embed="https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view?embed" data-label="📬 April 2026 Newsletter">
-        <span>🌸</span>
-        April 2026
-      </div>
-      <div class="archive-card" role="button" tabindex="0" data-embed="https://www.canva.com/design/DAHDFnvPjgI/plNcUuyJtu6gtSE4bIrY6w/view?embed" data-label="📬 March 2026 Newsletter">
-        <span>🍀</span>
-        March 2026
+  <!-- PRACTICE SPANISH AT HOME -->
+  <div style="max-width:700px; margin: 0 auto 40px; padding: 0 24px;">
+    <div style="background:white; border-radius:20px; padding:28px 28px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--theme-light); text-align:center;">
+      <div style="font-size:2rem; margin-bottom:8px;">🎶</div>
+      <h2 style="font-family:'Fredoka One',cursive; font-size:1.4rem; color:#1A1A2E; margin-bottom:8px;">Practice Spanish at Home!</h2>
+      <p style="color:#555; font-size:0.95rem; font-weight:600; line-height:1.6; margin-bottom:6px;">Want a fun way to keep the Spanish learning going at home? We love this video for little ones! Join Mi perro Chocolo for a silly, energetic dance out in the field. Your little ones will be singing, moving, and laughing along in Spanish before you know it. Press play and dance together!</p>
+      <p style="color:#555; font-size:0.95rem; font-weight:600; line-height:1.6; margin-bottom:16px;">¿Buscas una manera divertida de seguir practicando el español en casa? ¡Este video es perfecto para los pequeños! Acompaña a Mi perro Chocolo en un baile lleno de alegría y movimiento. ¡Dale play y bailen juntos!</p>
+      <a href="https://www.youtube.com/watch?v=5UfYHJ4ReMA" target="_blank" rel="noopener"
+        style="display:inline-block; background:var(--theme); color:white; text-decoration:none; border-radius:50px; padding:12px 28px; font-weight:800; font-size:0.95rem;">
+        🐶 Mi perro Chocolo — ¡A bailar! 🌿
+      </a>
+    </div>
+  </div>
+
+  <!-- CONNECT WITH US -->
+  <div style="max-width:700px; margin: 0 auto 40px; padding: 0 24px;">
+    <div style="background:white; border-radius:20px; padding:28px 28px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--theme-light); text-align:center;">
+      <div style="font-size:2rem; margin-bottom:8px;">📱</div>
+      <h2 style="font-family:'Fredoka One',cursive; font-size:1.4rem; color:#1A1A2E; margin-bottom:8px;">Connect With Us! / ¡Conéctate con Nosotras!</h2>
+      <p style="color:#555; font-size:0.95rem; font-weight:600; line-height:1.6; margin-bottom:16px;">We love staying connected with our GloryBer families! Follow us for daily updates, fun moments, and a peek into our little ones' adventures.<br><br>Nos encanta mantenernos cerca de nuestras familias de GloryBer. Síguenos para ver actualizaciones diarias, momentos especiales y las aventuras de nuestros pequeños.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+        <a href="https://www.instagram.com/glorybersspanishacademy" target="_blank" rel="noopener"
+          style="display:inline-block; background:#E1306C; color:white; text-decoration:none; border-radius:50px; padding:12px 24px; font-weight:800; font-size:0.9rem;">
+          📸 @glorybersspanishacademy
+        </a>
+        <a href="https://www.facebook.com/search/top?q=Gloryber%27s%20Spanish%20Academy%20of%20Alexandria" target="_blank" rel="noopener"
+          style="display:inline-block; background:#1877F2; color:white; text-decoration:none; border-radius:50px; padding:12px 24px; font-weight:800; font-size:0.9rem;">
+          👍 Gloryber's Spanish Academy of Alexandria
+        </a>
       </div>
     </div>
   </div>
 
-  <script>
-    function switchNewsletter(card) {
-      const embedUrl = card.getAttribute('data-embed');
-      const label = card.getAttribute('data-label');
-      document.querySelector('.embed-container iframe').src = embedUrl;
-      document.querySelector('.newsletter-label').textContent = label;
-      document.querySelectorAll('.archive-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-    }
-
-    document.querySelectorAll('.archive-card').forEach(function(card) {
-      card.addEventListener('click', function(e) {
-        e.preventDefault();
-        switchNewsletter(card);
-      });
-      card.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        switchNewsletter(card);
-      });
-    });
-  </script>
+  <!-- ARCHIVE -->
+  <div class="archive">
+    <h2>📚 Newsletter Archive</h2>
+    <div class="archive-grid">
+      <a class="archive-card active" href="https://www.canva.com/design/DAHE3msN9JI/RRsqPNi62l62VFkUiXzhlQ/view" target="_blank" rel="noopener">
+        <span>🌸</span>
+        April 2026
+      </a>
+      <a class="archive-card" href="https://www.canva.com/design/DAHDFnvPjgI/plNcUuyJtu6gtSE4bIrY6w/view" target="_blank" rel="noopener">
+        <span>🍀</span>
+        March 2026
+      </a>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <div class="footer">
