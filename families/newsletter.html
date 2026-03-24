@@ -102,6 +102,14 @@
       border-radius: 16px;
       overflow: hidden;
       background: white;
+      isolation: isolate;
+    }
+
+    @media (max-width: 600px) {
+      .embed-container {
+        padding-top: 0;
+        height: 420px;
+      }
     }
 
     .embed-container iframe {
